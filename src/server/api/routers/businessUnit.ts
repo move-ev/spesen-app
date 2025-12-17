@@ -1,5 +1,6 @@
 import {
   createBusinessUnitSchema,
+  deleteBusinessUnitSchema,
   updateBusinessUnitSchema,
 } from "@/lib/validators";
 import { TRPCError } from "@trpc/server";
@@ -37,6 +38,13 @@ export const businessUnitRouter = createTRPCRouter({
       return ctx.db.businessUnit.update({
         where: { id: input.id },
         data: { name: input.name, updatedAt: new Date() },
+      });
+    }),
+  delete: publicProcedure
+    .input(deleteBusinessUnitSchema)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.businessUnit.delete({
+        where: { id: input.id },
       });
     }),
 });

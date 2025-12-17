@@ -30,6 +30,7 @@ export function BusinessUnitsTable() {
         <TableRow>
           <TableHead>Name</TableHead>
           <TableHead>Erstellt</TableHead>
+          <TableHead>Aktualisiert</TableHead>
           <TableHead className="text-right">Aktionen</TableHead>
         </TableRow>
       </TableHeader>
@@ -40,6 +41,10 @@ export function BusinessUnitsTable() {
             <TableCell>
               {format(unit.createdAt, "dd.MM.yyyy")} um{" "}
               {format(unit.createdAt, "HH:mm")} Uhr{" "}
+            </TableCell>
+            <TableCell>
+              {format(unit.updatedAt, "dd.MM.yyyy")} um{" "}
+              {format(unit.updatedAt, "HH:mm")} Uhr{" "}
             </TableCell>
             <TableCell className="flex justify-end">
               <Sheet>

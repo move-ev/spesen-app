@@ -18,7 +18,20 @@ export function UpdateBusinessUnitForm({
   unit: BusinessUnit;
 }) {
   const utils = api.useUtils();
+
   const updateBusinessUnit = api.businessUnit.update.useMutation({
+    onSuccess: () => {
+      utils.businessUnit.list.invalidate();
+      form.reset();
+    },
+    onError: (error) => {
+      toast.error("Ein Fehler ist aufgetreten", {
+        description: error.message ?? "Ein unerwarteter Fehler ist aufgetreten",
+      });
+    },
+  });
+
+  const deleteBusinessUnit = api.businessUnit.delete.useMutation({
     onSuccess: () => {
       utils.businessUnit.list.invalidate();
       form.reset();
@@ -79,12 +92,28 @@ export function UpdateBusinessUnitForm({
         <Button
           type="submit"
           form="update-business-unit-form"
-          disabled={updateBusinessUnit.isPending}
+          disabled={
+            updateBusinessUnit.isPending || deleteBusinessUnit.isPending
+          }
         >
           {updateBusinessUnit.isPending ? (
             <Loader2Icon className="size-4 animate-spin" />
           ) : (
             <span>Geschäftsbereich aktualisieren</span>
+          )}
+        </Button>
+        <Button
+          type="button"
+          variant={"destructive"}
+          onClick={() => deleteBusinessUnit.mutate({ id: unit.id })}
+          disabled={
+            deleteBusinessUnit.isPending || updateBusinessUnit.isPending
+          }
+        >
+          {deleteBusinessUnit.isPending ? (
+            <Loader2Icon className="size-4 animate-spin" />
+          ) : (
+            <span>Geschäftsbereich löschen</span>
           )}
         </Button>
       </FieldGroup>
