@@ -1,3 +1,4 @@
+import { CreateAccountingUnitForm } from "@/components/forms/create-accounting-unit";
 import { PageTitle } from "@/components/page-title";
 import { AccountingUnitsTable } from "@/components/tables/accounting-units";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,9 @@ export default async function ServerPage() {
                 Erstelle eine neue Kostenstelle
               </SheetDescription>
             </SheetHeader>
-            <div className="p-4"></div>
+            <div className="p-4">
+              <CreateAccountingUnitForm />
+            </div>
           </SheetContent>
         </Sheet>
       </header>
