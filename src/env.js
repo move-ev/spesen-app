@@ -19,7 +19,6 @@ export const env = createEnv({
 
     MICROSOFT_CLIENT_ID: z.string(),
     MICROSOFT_CLIENT_SECRET: z.string(),
-
   },
 
   /**
@@ -42,7 +41,6 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     MICROSOFT_CLIENT_ID: process.env.MICROSOFT_CLIENT_ID,
     MICROSOFT_CLIENT_SECRET: process.env.MICROSOFT_CLIENT_SECRET,
-
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
