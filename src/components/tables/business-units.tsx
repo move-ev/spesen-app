@@ -69,7 +69,7 @@ export function BusinessUnitsTable() {
         {units.length === 0 && (
           <TableRow>
             <TableCell
-              colSpan={3}
+              colSpan={4}
               className="text-muted-foreground h-32 text-center"
             >
               Keine Geschäftseinheiten gefunden
