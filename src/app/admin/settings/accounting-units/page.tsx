@@ -1,4 +1,5 @@
 import { PageTitle } from "@/components/page-title";
+import { AccountingUnitsTable } from "@/components/tables/accounting-units";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,7 +13,7 @@ import { api } from "@/trpc/server";
 import { PlusIcon } from "lucide-react";
 
 export default async function ServerPage() {
-  void api.businessUnit.list.prefetch();
+  void api.accountingUnit.list.prefetch();
 
   return (
     <div>
@@ -36,7 +37,9 @@ export default async function ServerPage() {
           </SheetContent>
         </Sheet>
       </header>
-      <div className="mt-12"></div>
+      <div className="mt-12">
+        <AccountingUnitsTable />
+      </div>
     </div>
   );
 }
