@@ -12,19 +12,150 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        String   @id @default(cuid())
-  name      String
+enum ReportStatus {
+  DRAFT
+  IN_REVIEW
+  EDIT_REQUIRED
+  REJECTED
+  APPROVED
+  CLEARED
+}
+
+model Report {
+  id     String       @id @default(cuid())
+  title  String
+  status ReportStatus @default(DRAFT)
+  reason String
+
+  businessUnitId String
+  businessUnit   BusinessUnit @relation(fields: [businessUnitId], references: [id])
+
+  accountingUnitId String
+  accountingUnit   AccountingUnit @relation(fields: [accountingUnitId], references: [id])
+
+  requestorId String
+  requestor   User   @relation("ReportRequestor", fields: [requestorId], references: [id])
+
+  reviewerId String?
+  reviewer   User?   @relation("ReportReviewer", fields: [reviewerId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  createdBy   User   @relation(fields: [createdById], references: [id])
-  createdById String
+  comments Comment[]
 
-  @@index([name])
+  @@map("report")
+}
+
+model BusinessUnit {
+  id   String @id @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reports Report[]
+
+  @@map("business_unit")
+}
+
+model AccountingUnit {
+  id   String @id @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reports Report[]
+
+  @@map("accounting_unit")
+}
+
+model CostAccount {
+  id   String @id @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  expenses Expense[]
+
+  @@map("cost_account")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  reportId String
+  report   Report @relation(fields: [reportId], references: [id])
+
+  @@map("comment")
+}
+
+model Expense {
+  id        String      @id @default(cuid())
+  title     String
+  amount    Decimal
+  startDate DateTime
+  endDate   DateTime
+  type      ExpenseType
+  reasoning String?
+
+  costAccountId    String
+  costAccount      CostAccount       @relation(fields: [costAccountId], references: [id])
+  receiptExpensees ReceiptExpensee[]
+  travelExpenses   TravelExpense[]
+  mealExpenses     MealExpense[]
+}
+
+enum ExpenseType {
+  RECEIPT
+  TRAVEL
+  MEALS
+}
+
+model ReceiptExpensee {
+  id        String  @id @default(cuid())
+  expenseId String
+  expense   Expense @relation(fields: [expenseId], references: [id])
+
+  attachments Attachment[]
+}
+
+model Attachment {
+  id  String @id @default(cuid())
+  url String
+
+  receiptExpenseId String
+  receiptExpense   ReceiptExpensee @relation(fields: [receiptExpenseId], references: [id])
+}
+
+model TravelExpense {
+  id        String  @id @default(cuid())
+  expenseId String
+  expense   Expense @relation(fields: [expenseId], references: [id])
+
+  startPoint String
+  endPoint   String
+  distance   Decimal
+}
+
+model MealExpense {
+  id        String  @id @default(cuid())
+  expenseId String
+  expense   Expense @relation(fields: [expenseId], references: [id])
+
+  discountBreakfast Int
+  discountLunch     Int
+  discountDinner    Int
 }
 
 model User {
@@ -37,7 +168,10 @@ model User {
   updatedAt     DateTime  @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
-  posts         Post[]
+
+  comments         Comment[]
+  requestedReports Report[]  @relation("ReportRequestor")
+  reviewedReports  Report[]  @relation("ReportReviewer")
 
   @@unique([email])
   @@map("user")
