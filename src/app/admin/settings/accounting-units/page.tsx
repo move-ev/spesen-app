@@ -1,0 +1,42 @@
+import { PageTitle } from "@/components/page-title";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { api } from "@/trpc/server";
+import { PlusIcon } from "lucide-react";
+
+export default async function ServerPage() {
+  void api.businessUnit.list.prefetch();
+
+  return (
+    <div>
+      <header className="flex flex-wrap items-center justify-between gap-4">
+        <PageTitle>Kostenstellen</PageTitle>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant={"outline"}>
+              <PlusIcon />
+              Kostenstelle erstellen
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Kostenstelle erstellen</SheetTitle>
+              <SheetDescription>
+                Erstelle eine neue Kostenstelle
+              </SheetDescription>
+            </SheetHeader>
+            <div className="p-4"></div>
+          </SheetContent>
+        </Sheet>
+      </header>
+      <div className="mt-12"></div>
+    </div>
+  );
+}

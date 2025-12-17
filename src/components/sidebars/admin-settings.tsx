@@ -1,6 +1,6 @@
 import { ADMIN_SETTINGS_ROUTES } from "@/lib/routes";
-import { Building2Icon } from "lucide-react";
 import Link from "next/link";
+import { AccountingUnitIcon, BusinessUnitIcon } from "../icons/general";
 import {
   Sidebar,
   SidebarContent,
@@ -15,7 +15,12 @@ const routes = [
   {
     href: ADMIN_SETTINGS_ROUTES.BUSINESS_UNIT,
     label: "Geschäftseinheiten",
-    icon: Building2Icon,
+    icon: BusinessUnitIcon,
+  },
+  {
+    href: ADMIN_SETTINGS_ROUTES.ACCOUNTING_UNIT,
+    label: "Kostenstellen",
+    icon: AccountingUnitIcon,
   },
 ];
 
