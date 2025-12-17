@@ -1,4 +1,8 @@
-import { createBusinessUnitSchema } from "@/lib/validators";
+import {
+  createBusinessUnitSchema,
+  updateBusinessUnitSchema,
+} from "@/lib/validators";
+import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 /**
@@ -15,6 +19,24 @@ export const businessUnitRouter = createTRPCRouter({
         data: {
           name: input.name,
         },
+      });
+    }),
+  update: publicProcedure
+    .input(updateBusinessUnitSchema)
+    .mutation(async ({ ctx, input }) => {
+      const businessUnit = await ctx.db.businessUnit.findUnique({
+        where: { id: input.id },
+      });
+      if (!businessUnit) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Geschäftseinheit nicht gefunden",
+        });
+      }
+
+      return ctx.db.businessUnit.update({
+        where: { id: input.id },
+        data: { name: input.name, updatedAt: new Date() },
       });
     }),
 });

@@ -2,6 +2,16 @@
 
 import { api } from "@/trpc/react";
 import { format } from "date-fns";
+import { EllipsisVerticalIcon } from "lucide-react";
+import { UpdateBusinessUnitForm } from "../forms/update-business-unit";
+import { Button } from "../ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../ui/sheet";
 import {
   Table,
   TableBody,
@@ -30,6 +40,23 @@ export function BusinessUnitsTable() {
             <TableCell>
               {format(unit.createdAt, "dd.MM.yyyy")} um{" "}
               {format(unit.createdAt, "HH:mm")} Uhr{" "}
+            </TableCell>
+            <TableCell className="flex justify-end">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant={"ghost"} size={"icon-sm"}>
+                    <EllipsisVerticalIcon />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Geschäftseinheit aktualisieren</SheetTitle>
+                  </SheetHeader>
+                  <div className="p-4">
+                    <UpdateBusinessUnitForm unit={unit} />
+                  </div>
+                </SheetContent>
+              </Sheet>
             </TableCell>
           </TableRow>
         ))}
