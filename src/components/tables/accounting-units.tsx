@@ -19,6 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { UpdateAccountingUnitForm } from "../forms/update-accounting-unit";
 
 export function AccountingUnitsTable() {
   const [units] = api.accountingUnit.list.useSuspenseQuery();
@@ -56,7 +57,9 @@ export function AccountingUnitsTable() {
                   <SheetHeader>
                     <SheetTitle>Kostenstelle aktualisieren</SheetTitle>
                   </SheetHeader>
-                  <div className="p-4"></div>
+                  <div className="p-4">
+                    <UpdateAccountingUnitForm unit={unit} />
+                  </div>
                 </SheetContent>
               </Sheet>
             </TableCell>
