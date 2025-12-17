@@ -1,3 +1,5 @@
+import AppSidebar from "@/components/sidebars/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AUTH_ROUTES } from "@/lib/routes";
 import { auth } from "@/server/better-auth";
 import { headers } from "next/headers";
@@ -15,5 +17,10 @@ export default async function ServerLayout({
     redirect(AUTH_ROUTES.LOGIN);
   }
 
-  return children;
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main className="flex-1">{children}</main>
+    </SidebarProvider>
+  );
 }
