@@ -1,3 +1,4 @@
+import AppNavbar from "@/components/app-navbar";
 import AppSidebar from "@/components/sidebars/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AUTH_ROUTES } from "@/lib/routes";
@@ -20,7 +21,10 @@ export default async function ServerLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">
+        <AppNavbar />
+        {children}
+      </main>
     </SidebarProvider>
   );
 }
