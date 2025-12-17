@@ -1,8 +1,9 @@
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-
 import { env } from "@/env";
 import { db } from "@/server/db";
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
+import { admin as adminPlugin } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: prismaAdapter(db, {
@@ -20,6 +21,7 @@ export const auth = betterAuth({
       prompt: "select_account",
     },
   },
+  plugins: [adminPlugin(), nextCookies()],
 });
 
 export type Session = typeof auth.$Infer.Session;
