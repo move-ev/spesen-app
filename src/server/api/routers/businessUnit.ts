@@ -1,4 +1,4 @@
-import z from "zod";
+import { createBusinessUnitSchema } from "@/lib/validators";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 /**
@@ -9,11 +9,7 @@ export const businessUnitRouter = createTRPCRouter({
     return ctx.db.businessUnit.findMany();
   }),
   create: publicProcedure
-    .input(
-      z.object({
-        name: z.string(),
-      }),
-    )
+    .input(createBusinessUnitSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.businessUnit.create({
         data: {
