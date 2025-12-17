@@ -10,3 +10,19 @@ export function PageTitle({ className, ...props }: React.ComponentProps<"h1">) {
     />
   );
 }
+
+export function PageDescription({
+  className,
+  ...props
+}: React.ComponentProps<"p">) {
+  return (
+    <p
+      data-slot={"page-description"}
+      className={cn(
+        "text-muted-foreground text-sm leading-normal font-normal",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
