@@ -4,16 +4,13 @@ import {
   updateAccountingUnitSchema,
 } from "@/lib/validators";
 import { TRPCError } from "@trpc/server";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { adminProcedure, createTRPCRouter, protectedProcedure } from "../trpc";
 
-/**
- * @todo: Important: Update procedure middlewares to admin procedures
- */
 export const accountingUnitRouter = createTRPCRouter({
-  list: publicProcedure.query(async ({ ctx }) => {
+  list: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.accountingUnit.findMany();
   }),
-  create: publicProcedure
+  create: adminProcedure
     .input(createAccountingUnitSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.accountingUnit.create({
@@ -22,7 +19,7 @@ export const accountingUnitRouter = createTRPCRouter({
         },
       });
     }),
-  update: publicProcedure
+  update: adminProcedure
     .input(updateAccountingUnitSchema)
     .mutation(async ({ ctx, input }) => {
       const accountingUnit = await ctx.db.accountingUnit.findUnique({
@@ -40,7 +37,7 @@ export const accountingUnitRouter = createTRPCRouter({
         data: { name: input.name, updatedAt: new Date() },
       });
     }),
-  delete: publicProcedure
+  delete: adminProcedure
     .input(deleteAccountingUnitSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.accountingUnit.delete({

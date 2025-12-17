@@ -132,3 +132,19 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+export const adminProcedure = protectedProcedure
+  .use(timingMiddleware)
+  .use(({ ctx, next }) => {
+    const role = ctx.session?.user.role;
+
+    if (role !== "admin") {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  });
