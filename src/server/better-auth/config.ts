@@ -9,13 +9,15 @@ export const auth = betterAuth({
     provider: "postgresql", // or "sqlite" or "mysql"
   }),
   emailAndPassword: {
-    enabled: true,
+    enabled: false,
   },
   socialProviders: {
-    github: {
-      clientId: env.BETTER_AUTH_GITHUB_CLIENT_ID,
-      clientSecret: env.BETTER_AUTH_GITHUB_CLIENT_SECRET,
-      redirectURI: "http://localhost:3000/api/auth/callback/github",
+    microsoft: {
+      clientId: env.MICROSOFT_CLIENT_ID as string,
+      clientSecret: env.MICROSOFT_CLIENT_SECRET as string,
+      tenantId: "6f1276a0-6c96-449b-a10f-1a3d157a8bc4",
+      authority: "https://login.microsoftonline.com",
+      prompt: "select_account",
     },
   },
 });
