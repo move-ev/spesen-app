@@ -4,6 +4,7 @@ import { createBusinessUnitSchema } from "@/lib/validators";
 import { api } from "@/trpc/react";
 import { useForm } from "@tanstack/react-form";
 import { Loader2Icon } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
@@ -14,6 +15,11 @@ export function CreateBusinessUnitForm() {
     onSuccess: () => {
       utils.businessUnit.list.invalidate();
       form.reset();
+    },
+    onError: (error) => {
+      toast.error("Ein Fehler ist aufgetreten", {
+        description: error.message ?? "Ein unerwarteter Fehler ist aufgetreten",
+      });
     },
   });
 
