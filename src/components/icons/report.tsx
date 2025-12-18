@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { ReportStatus } from "generated/prisma/enums";
-import { BookDashedIcon, SquareIcon } from "lucide-react";
+import { BookDashedIcon, CircleDashedIcon } from "lucide-react";
 import type React from "react";
 
 export function ReportStatusIcon({
@@ -21,8 +21,8 @@ export function ReportStatusIcon({
       color = "text-gray-500";
       break;
     case "IN_REVIEW":
-      Icon = SquareIcon;
-      color = "text-blue-500";
+      Icon = CircleDashedIcon;
+      color = "text-zinc-500";
       break;
     default:
       Icon = BookDashedIcon;

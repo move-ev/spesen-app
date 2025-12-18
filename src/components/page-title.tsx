@@ -26,3 +26,16 @@ export function PageDescription({
     />
   );
 }
+
+export function PageSubtitle({
+  className,
+  ...props
+}: React.ComponentProps<"h3">) {
+  return (
+    <h3
+      data-slot={"page-subtitle"}
+      className={cn("text-lg font-semibold", className)}
+      {...props}
+    />
+  );
+}
