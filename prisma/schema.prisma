@@ -45,6 +45,7 @@ model Report {
   updatedAt DateTime @updatedAt
 
   comments Comment[]
+  expenses Expense[]
 
   @@map("report")
 }
@@ -108,6 +109,9 @@ model Expense {
   endDate   DateTime
   type      ExpenseType
   reasoning String?
+
+  reportId String
+  report   Report @relation(fields: [reportId], references: [id])
 
   costAccountId    String
   costAccount      CostAccount       @relation(fields: [costAccountId], references: [id])

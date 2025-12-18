@@ -227,6 +227,7 @@ export type ReportWhereInput = {
   requestor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   comments?: Prisma.CommentListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
 }
 
 export type ReportOrderByWithRelationInput = {
@@ -245,6 +246,7 @@ export type ReportOrderByWithRelationInput = {
   requestor?: Prisma.UserOrderByWithRelationInput
   reviewer?: Prisma.UserOrderByWithRelationInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
 }
 
 export type ReportWhereUniqueInput = Prisma.AtLeast<{
@@ -266,6 +268,7 @@ export type ReportWhereUniqueInput = Prisma.AtLeast<{
   requestor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   comments?: Prisma.CommentListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
 }, "id">
 
 export type ReportOrderByWithAggregationInput = {
@@ -312,6 +315,7 @@ export type ReportCreateInput = {
   requestor: Prisma.UserCreateNestedOneWithoutRequestedReportsInput
   reviewer?: Prisma.UserCreateNestedOneWithoutReviewedReportsInput
   comments?: Prisma.CommentCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateInput = {
@@ -326,6 +330,7 @@ export type ReportUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportUpdateInput = {
@@ -340,6 +345,7 @@ export type ReportUpdateInput = {
   requestor?: Prisma.UserUpdateOneRequiredWithoutRequestedReportsNestedInput
   reviewer?: Prisma.UserUpdateOneWithoutReviewedReportsNestedInput
   comments?: Prisma.CommentUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateInput = {
@@ -354,6 +360,7 @@ export type ReportUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportCreateManyInput = {
@@ -559,6 +566,20 @@ export type ReportUpdateOneRequiredWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ReportUpdateToOneWithWhereWithoutCommentsInput, Prisma.ReportUpdateWithoutCommentsInput>, Prisma.ReportUncheckedUpdateWithoutCommentsInput>
 }
 
+export type ReportCreateNestedOneWithoutExpensesInput = {
+  create?: Prisma.XOR<Prisma.ReportCreateWithoutExpensesInput, Prisma.ReportUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutExpensesInput
+  connect?: Prisma.ReportWhereUniqueInput
+}
+
+export type ReportUpdateOneRequiredWithoutExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.ReportCreateWithoutExpensesInput, Prisma.ReportUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.ReportCreateOrConnectWithoutExpensesInput
+  upsert?: Prisma.ReportUpsertWithoutExpensesInput
+  connect?: Prisma.ReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReportUpdateToOneWithWhereWithoutExpensesInput, Prisma.ReportUpdateWithoutExpensesInput>, Prisma.ReportUncheckedUpdateWithoutExpensesInput>
+}
+
 export type ReportCreateNestedManyWithoutRequestorInput = {
   create?: Prisma.XOR<Prisma.ReportCreateWithoutRequestorInput, Prisma.ReportUncheckedCreateWithoutRequestorInput> | Prisma.ReportCreateWithoutRequestorInput[] | Prisma.ReportUncheckedCreateWithoutRequestorInput[]
   connectOrCreate?: Prisma.ReportCreateOrConnectWithoutRequestorInput | Prisma.ReportCreateOrConnectWithoutRequestorInput[]
@@ -654,6 +675,7 @@ export type ReportCreateWithoutBusinessUnitInput = {
   requestor: Prisma.UserCreateNestedOneWithoutRequestedReportsInput
   reviewer?: Prisma.UserCreateNestedOneWithoutReviewedReportsInput
   comments?: Prisma.CommentCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutBusinessUnitInput = {
@@ -667,6 +689,7 @@ export type ReportUncheckedCreateWithoutBusinessUnitInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutBusinessUnitInput = {
@@ -722,6 +745,7 @@ export type ReportCreateWithoutAccountingUnitInput = {
   requestor: Prisma.UserCreateNestedOneWithoutRequestedReportsInput
   reviewer?: Prisma.UserCreateNestedOneWithoutReviewedReportsInput
   comments?: Prisma.CommentCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutAccountingUnitInput = {
@@ -735,6 +759,7 @@ export type ReportUncheckedCreateWithoutAccountingUnitInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutAccountingUnitInput = {
@@ -774,6 +799,7 @@ export type ReportCreateWithoutCommentsInput = {
   accountingUnit: Prisma.AccountingUnitCreateNestedOneWithoutReportsInput
   requestor: Prisma.UserCreateNestedOneWithoutRequestedReportsInput
   reviewer?: Prisma.UserCreateNestedOneWithoutReviewedReportsInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutCommentsInput = {
@@ -787,6 +813,7 @@ export type ReportUncheckedCreateWithoutCommentsInput = {
   reviewerId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutCommentsInput = {
@@ -816,6 +843,7 @@ export type ReportUpdateWithoutCommentsInput = {
   accountingUnit?: Prisma.AccountingUnitUpdateOneRequiredWithoutReportsNestedInput
   requestor?: Prisma.UserUpdateOneRequiredWithoutRequestedReportsNestedInput
   reviewer?: Prisma.UserUpdateOneWithoutReviewedReportsNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutCommentsInput = {
@@ -829,6 +857,79 @@ export type ReportUncheckedUpdateWithoutCommentsInput = {
   reviewerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutReportNestedInput
+}
+
+export type ReportCreateWithoutExpensesInput = {
+  id?: string
+  title: string
+  status?: $Enums.ReportStatus
+  reason: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  businessUnit: Prisma.BusinessUnitCreateNestedOneWithoutReportsInput
+  accountingUnit: Prisma.AccountingUnitCreateNestedOneWithoutReportsInput
+  requestor: Prisma.UserCreateNestedOneWithoutRequestedReportsInput
+  reviewer?: Prisma.UserCreateNestedOneWithoutReviewedReportsInput
+  comments?: Prisma.CommentCreateNestedManyWithoutReportInput
+}
+
+export type ReportUncheckedCreateWithoutExpensesInput = {
+  id?: string
+  title: string
+  status?: $Enums.ReportStatus
+  reason: string
+  businessUnitId: string
+  accountingUnitId: string
+  requestorId: string
+  reviewerId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type ReportCreateOrConnectWithoutExpensesInput = {
+  where: Prisma.ReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReportCreateWithoutExpensesInput, Prisma.ReportUncheckedCreateWithoutExpensesInput>
+}
+
+export type ReportUpsertWithoutExpensesInput = {
+  update: Prisma.XOR<Prisma.ReportUpdateWithoutExpensesInput, Prisma.ReportUncheckedUpdateWithoutExpensesInput>
+  create: Prisma.XOR<Prisma.ReportCreateWithoutExpensesInput, Prisma.ReportUncheckedCreateWithoutExpensesInput>
+  where?: Prisma.ReportWhereInput
+}
+
+export type ReportUpdateToOneWithWhereWithoutExpensesInput = {
+  where?: Prisma.ReportWhereInput
+  data: Prisma.XOR<Prisma.ReportUpdateWithoutExpensesInput, Prisma.ReportUncheckedUpdateWithoutExpensesInput>
+}
+
+export type ReportUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  businessUnit?: Prisma.BusinessUnitUpdateOneRequiredWithoutReportsNestedInput
+  accountingUnit?: Prisma.AccountingUnitUpdateOneRequiredWithoutReportsNestedInput
+  requestor?: Prisma.UserUpdateOneRequiredWithoutRequestedReportsNestedInput
+  reviewer?: Prisma.UserUpdateOneWithoutReviewedReportsNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutReportNestedInput
+}
+
+export type ReportUncheckedUpdateWithoutExpensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  businessUnitId?: Prisma.StringFieldUpdateOperationsInput | string
+  accountingUnitId?: Prisma.StringFieldUpdateOperationsInput | string
+  requestorId?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportCreateWithoutRequestorInput = {
@@ -842,6 +943,7 @@ export type ReportCreateWithoutRequestorInput = {
   accountingUnit: Prisma.AccountingUnitCreateNestedOneWithoutReportsInput
   reviewer?: Prisma.UserCreateNestedOneWithoutReviewedReportsInput
   comments?: Prisma.CommentCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutRequestorInput = {
@@ -855,6 +957,7 @@ export type ReportUncheckedCreateWithoutRequestorInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutRequestorInput = {
@@ -878,6 +981,7 @@ export type ReportCreateWithoutReviewerInput = {
   accountingUnit: Prisma.AccountingUnitCreateNestedOneWithoutReportsInput
   requestor: Prisma.UserCreateNestedOneWithoutRequestedReportsInput
   comments?: Prisma.CommentCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutReportInput
 }
 
 export type ReportUncheckedCreateWithoutReviewerInput = {
@@ -891,6 +995,7 @@ export type ReportUncheckedCreateWithoutReviewerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutReportInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutReportInput
 }
 
 export type ReportCreateOrConnectWithoutReviewerInput = {
@@ -958,6 +1063,7 @@ export type ReportUpdateWithoutBusinessUnitInput = {
   requestor?: Prisma.UserUpdateOneRequiredWithoutRequestedReportsNestedInput
   reviewer?: Prisma.UserUpdateOneWithoutReviewedReportsNestedInput
   comments?: Prisma.CommentUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutBusinessUnitInput = {
@@ -971,6 +1077,7 @@ export type ReportUncheckedUpdateWithoutBusinessUnitInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateManyWithoutBusinessUnitInput = {
@@ -1008,6 +1115,7 @@ export type ReportUpdateWithoutAccountingUnitInput = {
   requestor?: Prisma.UserUpdateOneRequiredWithoutRequestedReportsNestedInput
   reviewer?: Prisma.UserUpdateOneWithoutReviewedReportsNestedInput
   comments?: Prisma.CommentUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutAccountingUnitInput = {
@@ -1021,6 +1129,7 @@ export type ReportUncheckedUpdateWithoutAccountingUnitInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateManyWithoutAccountingUnitInput = {
@@ -1070,6 +1179,7 @@ export type ReportUpdateWithoutRequestorInput = {
   accountingUnit?: Prisma.AccountingUnitUpdateOneRequiredWithoutReportsNestedInput
   reviewer?: Prisma.UserUpdateOneWithoutReviewedReportsNestedInput
   comments?: Prisma.CommentUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutRequestorInput = {
@@ -1083,6 +1193,7 @@ export type ReportUncheckedUpdateWithoutRequestorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateManyWithoutRequestorInput = {
@@ -1108,6 +1219,7 @@ export type ReportUpdateWithoutReviewerInput = {
   accountingUnit?: Prisma.AccountingUnitUpdateOneRequiredWithoutReportsNestedInput
   requestor?: Prisma.UserUpdateOneRequiredWithoutRequestedReportsNestedInput
   comments?: Prisma.CommentUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateWithoutReviewerInput = {
@@ -1121,6 +1233,7 @@ export type ReportUncheckedUpdateWithoutReviewerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutReportNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutReportNestedInput
 }
 
 export type ReportUncheckedUpdateManyWithoutReviewerInput = {
@@ -1142,10 +1255,12 @@ export type ReportUncheckedUpdateManyWithoutReviewerInput = {
 
 export type ReportCountOutputType = {
   comments: number
+  expenses: number
 }
 
 export type ReportCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | ReportCountOutputTypeCountCommentsArgs
+  expenses?: boolean | ReportCountOutputTypeCountExpensesArgs
 }
 
 /**
@@ -1165,6 +1280,13 @@ export type ReportCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types
   where?: Prisma.CommentWhereInput
 }
 
+/**
+ * ReportCountOutputType without action
+ */
+export type ReportCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
 
 export type ReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1182,6 +1304,7 @@ export type ReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   requestor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.Report$reviewerArgs<ExtArgs>
   comments?: boolean | Prisma.Report$commentsArgs<ExtArgs>
+  expenses?: boolean | Prisma.Report$expensesArgs<ExtArgs>
   _count?: boolean | Prisma.ReportCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["report"]>
 
@@ -1239,6 +1362,7 @@ export type ReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   requestor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.Report$reviewerArgs<ExtArgs>
   comments?: boolean | Prisma.Report$commentsArgs<ExtArgs>
+  expenses?: boolean | Prisma.Report$expensesArgs<ExtArgs>
   _count?: boolean | Prisma.ReportCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1262,6 +1386,7 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     requestor: Prisma.$UserPayload<ExtArgs>
     reviewer: Prisma.$UserPayload<ExtArgs> | null
     comments: Prisma.$CommentPayload<ExtArgs>[]
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1673,6 +1798,7 @@ export interface Prisma__ReportClient<T, Null = never, ExtArgs extends runtime.T
   requestor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewer<T extends Prisma.Report$reviewerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$reviewerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   comments<T extends Prisma.Report$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenses<T extends Prisma.Report$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Report$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2148,6 +2274,30 @@ export type Report$commentsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * Report.expenses
+ */
+export type Report$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
 }
 
 /**
