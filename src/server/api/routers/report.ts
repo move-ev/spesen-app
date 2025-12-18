@@ -1,15 +1,39 @@
-import { ReportStatus } from "generated/prisma/enums";
 import { adminProcedure, createTRPCRouter } from "../trpc";
 
 export const reportRouter = createTRPCRouter({
-  getStats: adminProcedure.query(async ({ ctx }) => {
-    const grouped = await ctx.db.report.groupBy({
-      by: ["status"],
-      _count: { _all: true },
+  countAccepted: adminProcedure.query(async ({ ctx }) => {
+    return ctx.db.report.count({
+      where: {
+        status: "APPROVED",
+      },
+    });
+  }),
+  countRejected: adminProcedure.query(async ({ ctx }) => {
+    return ctx.db.report.count({
+      where: {
+        status: "REJECTED",
+      },
+    });
+  }),
+  countInReview: adminProcedure.query(async ({ ctx }) => {
+    return ctx.db.report.count({
+      where: {
+        status: "IN_REVIEW",
+      },
+    });
+  }),
+  countOpenAmount: adminProcedure.query(async ({ ctx }) => {
+    const result = await ctx.db.expense.aggregate({
+      _sum: {
+        amount: true,
+      },
+      where: {
+        report: {
+          status: "APPROVED",
+        },
+      },
     });
 
-    return Object.fromEntries(
-      grouped.map((row) => [row.status, row._count._all]),
-    ) as Record<ReportStatus, number>;
+    return result._sum.amount?.toFixed(2) ?? "0.00";
   }),
 });

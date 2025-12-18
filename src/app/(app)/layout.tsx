@@ -22,7 +22,7 @@ export default async function ServerLayout({
     <SidebarProvider>
       <AppSidebar />
       <main className="flex-1">
-        <AppNavbar />
+        <AppNavbar className="mb-12" />
         {children}
       </main>
     </SidebarProvider>

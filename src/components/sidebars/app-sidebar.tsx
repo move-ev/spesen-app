@@ -1,6 +1,6 @@
 import { ADMIN_SETTINGS_ROUTES, APP_ROUTES } from "@/lib/routes";
 import { auth } from "@/server/better-auth";
-import { HomeIcon, SettingsIcon } from "lucide-react";
+import { HomeIcon, SettingsIcon, ShieldIcon } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -52,6 +52,11 @@ export default async function AppSidebar({
 }
 
 const adminRoutes = [
+  {
+    href: APP_ROUTES.ADMIN,
+    label: "Admin",
+    icon: ShieldIcon,
+  },
   {
     href: ADMIN_SETTINGS_ROUTES.BUSINESS_UNIT,
     label: "Einstellungen",
