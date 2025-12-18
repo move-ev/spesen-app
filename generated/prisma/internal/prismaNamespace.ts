@@ -1558,6 +1558,7 @@ export const ExpenseScalarFieldEnum = {
   endDate: 'endDate',
   type: 'type',
   reasoning: 'reasoning',
+  reportId: 'reportId',
   costAccountId: 'costAccountId'
 } as const
 

@@ -1,5 +1,6 @@
 export const APP_ROUTES = {
   HOME: "/",
+  ADMIN: "/admin",
 } as const;
 
 export const ADMIN_SETTINGS_ROUTES = {
