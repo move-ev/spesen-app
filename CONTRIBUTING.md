@@ -15,7 +15,7 @@
 
    ```bash
    nvm install
-   nvm user
+   nvm use
    ```
 
 3. Install pnpm if you haven't already:
