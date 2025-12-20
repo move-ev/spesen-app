@@ -4,10 +4,10 @@
 
 1. Clone the repositor to your local machine
 
-```
-git clone https://github.com/move-ev/spesen-app.git
-cd spesen-app
-```
+   ```bash
+   git clone https://github.com/move-ev/spesen-app.git
+   cd spesen-app
+   ```
 
 2. Install Node.js (LTS version recommended)
 
