@@ -3,6 +3,47 @@ import { TRPCError } from "@trpc/server";
 import { adminProcedure, createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const reportRouter = createTRPCRouter({
+  getHeaderDetails: protectedProcedure
+    .input(getReportByIdSchema)
+    .query(async ({ ctx, input }) => {
+      const report = await ctx.db.report.findUnique({
+        where: {
+          id: input.id,
+        },
+        include: {
+          expenses: {
+            select: {
+              amount: true,
+            },
+          },
+        },
+      });
+
+      if (!report) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Report not found",
+        });
+      }
+
+      if (
+        ctx.session.user.role !== "admin" &&
+        report.requestorId !== ctx.session.user.id
+      ) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You are not authorized to view this report",
+        });
+      }
+
+      return {
+        ...report,
+        totalAmount: report.expenses.reduce(
+          (acc, expense) => acc + Number(expense.amount),
+          0,
+        ),
+      };
+    }),
   getById: protectedProcedure
     .input(getReportByIdSchema)
     .query(async ({ ctx, input }) => {

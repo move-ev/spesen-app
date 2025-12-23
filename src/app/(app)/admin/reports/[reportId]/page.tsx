@@ -1,4 +1,4 @@
-import { api } from "@/trpc/server";
+import { AdminReportDetailsHeaderSection } from "./_components/header";
 import { AdminReportDetailsSummarySection } from "./_components/summary";
 
 export default async function ServerPage({
@@ -10,13 +10,10 @@ export default async function ServerPage({
 }) {
   const { reportId } = await params;
 
-  void api.report.getById.prefetch({
-    id: reportId,
-  });
-
   return (
     <div>
-      <AdminReportDetailsSummarySection reportId={reportId} />
+      <AdminReportDetailsHeaderSection reportId={reportId} />
+      <AdminReportDetailsSummarySection reportId={reportId} className="mt-20" />
     </div>
   );
 }
