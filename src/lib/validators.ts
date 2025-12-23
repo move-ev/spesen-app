@@ -27,3 +27,8 @@ export const updateAccountingUnitSchema = z.object({
 export const deleteAccountingUnitSchema = z.object({
   id: z.cuid(),
 });
+
+// Report
+export const getReportByIdSchema = z.object({
+  id: z.string().min(1),
+});
