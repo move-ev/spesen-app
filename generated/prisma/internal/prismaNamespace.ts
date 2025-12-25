@@ -390,7 +390,7 @@ export const ModelName = {
   CostAccount: 'CostAccount',
   Comment: 'Comment',
   Expense: 'Expense',
-  ReceiptExpensee: 'ReceiptExpensee',
+  ReceiptExpense: 'ReceiptExpense',
   Attachment: 'Attachment',
   TravelExpense: 'TravelExpense',
   MealExpense: 'MealExpense',
@@ -413,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "report" | "businessUnit" | "accountingUnit" | "costAccount" | "comment" | "expense" | "receiptExpensee" | "attachment" | "travelExpense" | "mealExpense" | "user" | "session" | "account" | "verification"
+    modelProps: "report" | "businessUnit" | "accountingUnit" | "costAccount" | "comment" | "expense" | "receiptExpense" | "attachment" | "travelExpense" | "mealExpense" | "user" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -861,77 +861,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ReceiptExpensee: {
-      payload: Prisma.$ReceiptExpenseePayload<ExtArgs>
-      fields: Prisma.ReceiptExpenseeFieldRefs
+    ReceiptExpense: {
+      payload: Prisma.$ReceiptExpensePayload<ExtArgs>
+      fields: Prisma.ReceiptExpenseFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ReceiptExpenseeFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload> | null
+          args: Prisma.ReceiptExpenseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ReceiptExpenseeFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>
+          args: Prisma.ReceiptExpenseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>
         }
         findFirst: {
-          args: Prisma.ReceiptExpenseeFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload> | null
+          args: Prisma.ReceiptExpenseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ReceiptExpenseeFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>
+          args: Prisma.ReceiptExpenseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>
         }
         findMany: {
-          args: Prisma.ReceiptExpenseeFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>[]
+          args: Prisma.ReceiptExpenseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>[]
         }
         create: {
-          args: Prisma.ReceiptExpenseeCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>
+          args: Prisma.ReceiptExpenseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>
         }
         createMany: {
-          args: Prisma.ReceiptExpenseeCreateManyArgs<ExtArgs>
+          args: Prisma.ReceiptExpenseCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ReceiptExpenseeCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>[]
+          args: Prisma.ReceiptExpenseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>[]
         }
         delete: {
-          args: Prisma.ReceiptExpenseeDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>
+          args: Prisma.ReceiptExpenseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>
         }
         update: {
-          args: Prisma.ReceiptExpenseeUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>
+          args: Prisma.ReceiptExpenseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>
         }
         deleteMany: {
-          args: Prisma.ReceiptExpenseeDeleteManyArgs<ExtArgs>
+          args: Prisma.ReceiptExpenseDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ReceiptExpenseeUpdateManyArgs<ExtArgs>
+          args: Prisma.ReceiptExpenseUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ReceiptExpenseeUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>[]
+          args: Prisma.ReceiptExpenseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>[]
         }
         upsert: {
-          args: Prisma.ReceiptExpenseeUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpenseePayload>
+          args: Prisma.ReceiptExpenseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReceiptExpensePayload>
         }
         aggregate: {
-          args: Prisma.ReceiptExpenseeAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateReceiptExpensee>
+          args: Prisma.ReceiptExpenseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReceiptExpense>
         }
         groupBy: {
-          args: Prisma.ReceiptExpenseeGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReceiptExpenseeGroupByOutputType>[]
+          args: Prisma.ReceiptExpenseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReceiptExpenseGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ReceiptExpenseeCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReceiptExpenseeCountAggregateOutputType> | number
+          args: Prisma.ReceiptExpenseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReceiptExpenseCountAggregateOutputType> | number
         }
       }
     }
@@ -1565,12 +1565,12 @@ export const ExpenseScalarFieldEnum = {
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
 
 
-export const ReceiptExpenseeScalarFieldEnum = {
+export const ReceiptExpenseScalarFieldEnum = {
   id: 'id',
   expenseId: 'expenseId'
 } as const
 
-export type ReceiptExpenseeScalarFieldEnum = (typeof ReceiptExpenseeScalarFieldEnum)[keyof typeof ReceiptExpenseeScalarFieldEnum]
+export type ReceiptExpenseScalarFieldEnum = (typeof ReceiptExpenseScalarFieldEnum)[keyof typeof ReceiptExpenseScalarFieldEnum]
 
 
 export const AttachmentScalarFieldEnum = {
@@ -1902,7 +1902,7 @@ export type GlobalOmitConfig = {
   costAccount?: Prisma.CostAccountOmit
   comment?: Prisma.CommentOmit
   expense?: Prisma.ExpenseOmit
-  receiptExpensee?: Prisma.ReceiptExpenseeOmit
+  receiptExpense?: Prisma.ReceiptExpenseOmit
   attachment?: Prisma.AttachmentOmit
   travelExpense?: Prisma.TravelExpenseOmit
   mealExpense?: Prisma.MealExpenseOmit

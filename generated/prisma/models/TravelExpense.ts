@@ -230,15 +230,15 @@ export type TravelExpenseOrderByWithRelationInput = {
 
 export type TravelExpenseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  expenseId?: string
   AND?: Prisma.TravelExpenseWhereInput | Prisma.TravelExpenseWhereInput[]
   OR?: Prisma.TravelExpenseWhereInput[]
   NOT?: Prisma.TravelExpenseWhereInput | Prisma.TravelExpenseWhereInput[]
-  expenseId?: Prisma.StringFilter<"TravelExpense"> | string
   startPoint?: Prisma.StringFilter<"TravelExpense"> | string
   endPoint?: Prisma.StringFilter<"TravelExpense"> | string
   distance?: Prisma.DecimalFilter<"TravelExpense"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   expense?: Prisma.XOR<Prisma.ExpenseScalarRelationFilter, Prisma.ExpenseWhereInput>
-}, "id">
+}, "id" | "expenseId">
 
 export type TravelExpenseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -269,7 +269,7 @@ export type TravelExpenseCreateInput = {
   startPoint: string
   endPoint: string
   distance: runtime.Decimal | runtime.DecimalJsLike | number | string
-  expense: Prisma.ExpenseCreateNestedOneWithoutTravelExpensesInput
+  expense: Prisma.ExpenseCreateNestedOneWithoutTravelExpenseInput
 }
 
 export type TravelExpenseUncheckedCreateInput = {
@@ -285,7 +285,7 @@ export type TravelExpenseUpdateInput = {
   startPoint?: Prisma.StringFieldUpdateOperationsInput | string
   endPoint?: Prisma.StringFieldUpdateOperationsInput | string
   distance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  expense?: Prisma.ExpenseUpdateOneRequiredWithoutTravelExpensesNestedInput
+  expense?: Prisma.ExpenseUpdateOneRequiredWithoutTravelExpenseNestedInput
 }
 
 export type TravelExpenseUncheckedUpdateInput = {
@@ -319,14 +319,9 @@ export type TravelExpenseUncheckedUpdateManyInput = {
   distance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type TravelExpenseListRelationFilter = {
-  every?: Prisma.TravelExpenseWhereInput
-  some?: Prisma.TravelExpenseWhereInput
-  none?: Prisma.TravelExpenseWhereInput
-}
-
-export type TravelExpenseOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type TravelExpenseNullableScalarRelationFilter = {
+  is?: Prisma.TravelExpenseWhereInput | null
+  isNot?: Prisma.TravelExpenseWhereInput | null
 }
 
 export type TravelExpenseCountOrderByAggregateInput = {
@@ -361,46 +356,36 @@ export type TravelExpenseSumOrderByAggregateInput = {
   distance?: Prisma.SortOrder
 }
 
-export type TravelExpenseCreateNestedManyWithoutExpenseInput = {
-  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput> | Prisma.TravelExpenseCreateWithoutExpenseInput[] | Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput | Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput[]
-  createMany?: Prisma.TravelExpenseCreateManyExpenseInputEnvelope
-  connect?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
+export type TravelExpenseCreateNestedOneWithoutExpenseInput = {
+  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput
+  connect?: Prisma.TravelExpenseWhereUniqueInput
 }
 
-export type TravelExpenseUncheckedCreateNestedManyWithoutExpenseInput = {
-  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput> | Prisma.TravelExpenseCreateWithoutExpenseInput[] | Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput | Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput[]
-  createMany?: Prisma.TravelExpenseCreateManyExpenseInputEnvelope
-  connect?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
+export type TravelExpenseUncheckedCreateNestedOneWithoutExpenseInput = {
+  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput
+  connect?: Prisma.TravelExpenseWhereUniqueInput
 }
 
-export type TravelExpenseUpdateManyWithoutExpenseNestedInput = {
-  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput> | Prisma.TravelExpenseCreateWithoutExpenseInput[] | Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput | Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput[]
-  upsert?: Prisma.TravelExpenseUpsertWithWhereUniqueWithoutExpenseInput | Prisma.TravelExpenseUpsertWithWhereUniqueWithoutExpenseInput[]
-  createMany?: Prisma.TravelExpenseCreateManyExpenseInputEnvelope
-  set?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  disconnect?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  delete?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  connect?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  update?: Prisma.TravelExpenseUpdateWithWhereUniqueWithoutExpenseInput | Prisma.TravelExpenseUpdateWithWhereUniqueWithoutExpenseInput[]
-  updateMany?: Prisma.TravelExpenseUpdateManyWithWhereWithoutExpenseInput | Prisma.TravelExpenseUpdateManyWithWhereWithoutExpenseInput[]
-  deleteMany?: Prisma.TravelExpenseScalarWhereInput | Prisma.TravelExpenseScalarWhereInput[]
+export type TravelExpenseUpdateOneWithoutExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput
+  upsert?: Prisma.TravelExpenseUpsertWithoutExpenseInput
+  disconnect?: Prisma.TravelExpenseWhereInput | boolean
+  delete?: Prisma.TravelExpenseWhereInput | boolean
+  connect?: Prisma.TravelExpenseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TravelExpenseUpdateToOneWithWhereWithoutExpenseInput, Prisma.TravelExpenseUpdateWithoutExpenseInput>, Prisma.TravelExpenseUncheckedUpdateWithoutExpenseInput>
 }
 
-export type TravelExpenseUncheckedUpdateManyWithoutExpenseNestedInput = {
-  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput> | Prisma.TravelExpenseCreateWithoutExpenseInput[] | Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput | Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput[]
-  upsert?: Prisma.TravelExpenseUpsertWithWhereUniqueWithoutExpenseInput | Prisma.TravelExpenseUpsertWithWhereUniqueWithoutExpenseInput[]
-  createMany?: Prisma.TravelExpenseCreateManyExpenseInputEnvelope
-  set?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  disconnect?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  delete?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  connect?: Prisma.TravelExpenseWhereUniqueInput | Prisma.TravelExpenseWhereUniqueInput[]
-  update?: Prisma.TravelExpenseUpdateWithWhereUniqueWithoutExpenseInput | Prisma.TravelExpenseUpdateWithWhereUniqueWithoutExpenseInput[]
-  updateMany?: Prisma.TravelExpenseUpdateManyWithWhereWithoutExpenseInput | Prisma.TravelExpenseUpdateManyWithWhereWithoutExpenseInput[]
-  deleteMany?: Prisma.TravelExpenseScalarWhereInput | Prisma.TravelExpenseScalarWhereInput[]
+export type TravelExpenseUncheckedUpdateOneWithoutExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.TravelExpenseCreateOrConnectWithoutExpenseInput
+  upsert?: Prisma.TravelExpenseUpsertWithoutExpenseInput
+  disconnect?: Prisma.TravelExpenseWhereInput | boolean
+  delete?: Prisma.TravelExpenseWhereInput | boolean
+  connect?: Prisma.TravelExpenseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TravelExpenseUpdateToOneWithWhereWithoutExpenseInput, Prisma.TravelExpenseUpdateWithoutExpenseInput>, Prisma.TravelExpenseUncheckedUpdateWithoutExpenseInput>
 }
 
 export type TravelExpenseCreateWithoutExpenseInput = {
@@ -422,43 +407,15 @@ export type TravelExpenseCreateOrConnectWithoutExpenseInput = {
   create: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput>
 }
 
-export type TravelExpenseCreateManyExpenseInputEnvelope = {
-  data: Prisma.TravelExpenseCreateManyExpenseInput | Prisma.TravelExpenseCreateManyExpenseInput[]
-  skipDuplicates?: boolean
-}
-
-export type TravelExpenseUpsertWithWhereUniqueWithoutExpenseInput = {
-  where: Prisma.TravelExpenseWhereUniqueInput
+export type TravelExpenseUpsertWithoutExpenseInput = {
   update: Prisma.XOR<Prisma.TravelExpenseUpdateWithoutExpenseInput, Prisma.TravelExpenseUncheckedUpdateWithoutExpenseInput>
   create: Prisma.XOR<Prisma.TravelExpenseCreateWithoutExpenseInput, Prisma.TravelExpenseUncheckedCreateWithoutExpenseInput>
+  where?: Prisma.TravelExpenseWhereInput
 }
 
-export type TravelExpenseUpdateWithWhereUniqueWithoutExpenseInput = {
-  where: Prisma.TravelExpenseWhereUniqueInput
+export type TravelExpenseUpdateToOneWithWhereWithoutExpenseInput = {
+  where?: Prisma.TravelExpenseWhereInput
   data: Prisma.XOR<Prisma.TravelExpenseUpdateWithoutExpenseInput, Prisma.TravelExpenseUncheckedUpdateWithoutExpenseInput>
-}
-
-export type TravelExpenseUpdateManyWithWhereWithoutExpenseInput = {
-  where: Prisma.TravelExpenseScalarWhereInput
-  data: Prisma.XOR<Prisma.TravelExpenseUpdateManyMutationInput, Prisma.TravelExpenseUncheckedUpdateManyWithoutExpenseInput>
-}
-
-export type TravelExpenseScalarWhereInput = {
-  AND?: Prisma.TravelExpenseScalarWhereInput | Prisma.TravelExpenseScalarWhereInput[]
-  OR?: Prisma.TravelExpenseScalarWhereInput[]
-  NOT?: Prisma.TravelExpenseScalarWhereInput | Prisma.TravelExpenseScalarWhereInput[]
-  id?: Prisma.StringFilter<"TravelExpense"> | string
-  expenseId?: Prisma.StringFilter<"TravelExpense"> | string
-  startPoint?: Prisma.StringFilter<"TravelExpense"> | string
-  endPoint?: Prisma.StringFilter<"TravelExpense"> | string
-  distance?: Prisma.DecimalFilter<"TravelExpense"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type TravelExpenseCreateManyExpenseInput = {
-  id?: string
-  startPoint: string
-  endPoint: string
-  distance: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type TravelExpenseUpdateWithoutExpenseInput = {
@@ -469,13 +426,6 @@ export type TravelExpenseUpdateWithoutExpenseInput = {
 }
 
 export type TravelExpenseUncheckedUpdateWithoutExpenseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  startPoint?: Prisma.StringFieldUpdateOperationsInput | string
-  endPoint?: Prisma.StringFieldUpdateOperationsInput | string
-  distance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type TravelExpenseUncheckedUpdateManyWithoutExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   startPoint?: Prisma.StringFieldUpdateOperationsInput | string
   endPoint?: Prisma.StringFieldUpdateOperationsInput | string

@@ -70,10 +70,10 @@ export type Comment = Prisma.CommentModel
  */
 export type Expense = Prisma.ExpenseModel
 /**
- * Model ReceiptExpensee
+ * Model ReceiptExpense
  * 
  */
-export type ReceiptExpensee = Prisma.ReceiptExpenseeModel
+export type ReceiptExpense = Prisma.ReceiptExpenseModel
 /**
  * Model Attachment
  * 

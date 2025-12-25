@@ -113,11 +113,15 @@ model Expense {
   reportId String
   report   Report @relation(fields: [reportId], references: [id])
 
-  costAccountId    String
-  costAccount      CostAccount       @relation(fields: [costAccountId], references: [id])
-  receiptExpensees ReceiptExpensee[]
-  travelExpenses   TravelExpense[]
-  mealExpenses     MealExpense[]
+  costAccountId String
+  costAccount   CostAccount @relation(fields: [costAccountId], references: [id])
+
+  // Optional one-to-one relations (only one will be populated based on type)
+  receiptExpense ReceiptExpense?
+  travelExpense  TravelExpense?
+  mealExpense    MealExpense?
+
+  @@map("expense")
 }
 
 enum ExpenseType {
@@ -126,12 +130,14 @@ enum ExpenseType {
   MEALS
 }
 
-model ReceiptExpensee {
+model ReceiptExpense {
   id        String  @id @default(cuid())
-  expenseId String
-  expense   Expense @relation(fields: [expenseId], references: [id])
+  expenseId String  @unique
+  expense   Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
 
   attachments Attachment[]
+
+  @@map("receipt_expense")
 }
 
 model Attachment {
@@ -139,27 +145,33 @@ model Attachment {
   url String
 
   receiptExpenseId String
-  receiptExpense   ReceiptExpensee @relation(fields: [receiptExpenseId], references: [id])
+  receiptExpense   ReceiptExpense @relation(fields: [receiptExpenseId], references: [id], onDelete: Cascade)
+
+  @@map("attachment")
 }
 
 model TravelExpense {
   id        String  @id @default(cuid())
-  expenseId String
-  expense   Expense @relation(fields: [expenseId], references: [id])
+  expenseId String  @unique
+  expense   Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
 
   startPoint String
   endPoint   String
   distance   Decimal
+
+  @@map("travel_expense")
 }
 
 model MealExpense {
   id        String  @id @default(cuid())
-  expenseId String
-  expense   Expense @relation(fields: [expenseId], references: [id])
+  expenseId String  @unique
+  expense   Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
 
   discountBreakfast Int
   discountLunch     Int
   discountDinner    Int
+
+  @@map("meal_expense")
 }
 
 model User {
@@ -200,8 +212,8 @@ model Session {
   impersonatedBy String?
 
   @@unique([token])
-  @@map("session")
   @@index([userId])
+  @@map("session")
 }
 
 model Account {
@@ -220,7 +232,6 @@ model Account {
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
 
-  @@map("account")
   @@index([userId])
 }
 

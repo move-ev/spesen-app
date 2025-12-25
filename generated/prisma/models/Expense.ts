@@ -250,9 +250,9 @@ export type ExpenseWhereInput = {
   costAccountId?: Prisma.StringFilter<"Expense"> | string
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
   costAccount?: Prisma.XOR<Prisma.CostAccountScalarRelationFilter, Prisma.CostAccountWhereInput>
-  receiptExpensees?: Prisma.ReceiptExpenseeListRelationFilter
-  travelExpenses?: Prisma.TravelExpenseListRelationFilter
-  mealExpenses?: Prisma.MealExpenseListRelationFilter
+  receiptExpense?: Prisma.XOR<Prisma.ReceiptExpenseNullableScalarRelationFilter, Prisma.ReceiptExpenseWhereInput> | null
+  travelExpense?: Prisma.XOR<Prisma.TravelExpenseNullableScalarRelationFilter, Prisma.TravelExpenseWhereInput> | null
+  mealExpense?: Prisma.XOR<Prisma.MealExpenseNullableScalarRelationFilter, Prisma.MealExpenseWhereInput> | null
 }
 
 export type ExpenseOrderByWithRelationInput = {
@@ -267,9 +267,9 @@ export type ExpenseOrderByWithRelationInput = {
   costAccountId?: Prisma.SortOrder
   report?: Prisma.ReportOrderByWithRelationInput
   costAccount?: Prisma.CostAccountOrderByWithRelationInput
-  receiptExpensees?: Prisma.ReceiptExpenseeOrderByRelationAggregateInput
-  travelExpenses?: Prisma.TravelExpenseOrderByRelationAggregateInput
-  mealExpenses?: Prisma.MealExpenseOrderByRelationAggregateInput
+  receiptExpense?: Prisma.ReceiptExpenseOrderByWithRelationInput
+  travelExpense?: Prisma.TravelExpenseOrderByWithRelationInput
+  mealExpense?: Prisma.MealExpenseOrderByWithRelationInput
 }
 
 export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
@@ -287,9 +287,9 @@ export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
   costAccountId?: Prisma.StringFilter<"Expense"> | string
   report?: Prisma.XOR<Prisma.ReportScalarRelationFilter, Prisma.ReportWhereInput>
   costAccount?: Prisma.XOR<Prisma.CostAccountScalarRelationFilter, Prisma.CostAccountWhereInput>
-  receiptExpensees?: Prisma.ReceiptExpenseeListRelationFilter
-  travelExpenses?: Prisma.TravelExpenseListRelationFilter
-  mealExpenses?: Prisma.MealExpenseListRelationFilter
+  receiptExpense?: Prisma.XOR<Prisma.ReceiptExpenseNullableScalarRelationFilter, Prisma.ReceiptExpenseWhereInput> | null
+  travelExpense?: Prisma.XOR<Prisma.TravelExpenseNullableScalarRelationFilter, Prisma.TravelExpenseWhereInput> | null
+  mealExpense?: Prisma.XOR<Prisma.MealExpenseNullableScalarRelationFilter, Prisma.MealExpenseWhereInput> | null
 }, "id">
 
 export type ExpenseOrderByWithAggregationInput = {
@@ -334,9 +334,9 @@ export type ExpenseCreateInput = {
   reasoning?: string | null
   report: Prisma.ReportCreateNestedOneWithoutExpensesInput
   costAccount: Prisma.CostAccountCreateNestedOneWithoutExpensesInput
-  receiptExpensees?: Prisma.ReceiptExpenseeCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUncheckedCreateInput = {
@@ -349,9 +349,9 @@ export type ExpenseUncheckedCreateInput = {
   reasoning?: string | null
   reportId: string
   costAccountId: string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseUncheckedCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseUncheckedCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUpdateInput = {
@@ -364,9 +364,9 @@ export type ExpenseUpdateInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report?: Prisma.ReportUpdateOneRequiredWithoutExpensesNestedInput
   costAccount?: Prisma.CostAccountUpdateOneRequiredWithoutExpensesNestedInput
-  receiptExpensees?: Prisma.ReceiptExpenseeUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateInput = {
@@ -379,9 +379,9 @@ export type ExpenseUncheckedUpdateInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportId?: Prisma.StringFieldUpdateOperationsInput | string
   costAccountId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUncheckedUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseCreateManyInput = {
@@ -573,46 +573,46 @@ export type EnumExpenseTypeFieldUpdateOperationsInput = {
   set?: $Enums.ExpenseType
 }
 
-export type ExpenseCreateNestedOneWithoutReceiptExpenseesInput = {
-  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseesInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseesInput>
-  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutReceiptExpenseesInput
+export type ExpenseCreateNestedOneWithoutReceiptExpenseInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutReceiptExpenseInput
   connect?: Prisma.ExpenseWhereUniqueInput
 }
 
-export type ExpenseUpdateOneRequiredWithoutReceiptExpenseesNestedInput = {
-  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseesInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseesInput>
-  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutReceiptExpenseesInput
-  upsert?: Prisma.ExpenseUpsertWithoutReceiptExpenseesInput
+export type ExpenseUpdateOneRequiredWithoutReceiptExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutReceiptExpenseInput
+  upsert?: Prisma.ExpenseUpsertWithoutReceiptExpenseInput
   connect?: Prisma.ExpenseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutReceiptExpenseesInput, Prisma.ExpenseUpdateWithoutReceiptExpenseesInput>, Prisma.ExpenseUncheckedUpdateWithoutReceiptExpenseesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutReceiptExpenseInput, Prisma.ExpenseUpdateWithoutReceiptExpenseInput>, Prisma.ExpenseUncheckedUpdateWithoutReceiptExpenseInput>
 }
 
-export type ExpenseCreateNestedOneWithoutTravelExpensesInput = {
-  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpensesInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpensesInput>
-  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutTravelExpensesInput
-  connect?: Prisma.ExpenseWhereUniqueInput
-}
-
-export type ExpenseUpdateOneRequiredWithoutTravelExpensesNestedInput = {
-  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpensesInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpensesInput>
-  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutTravelExpensesInput
-  upsert?: Prisma.ExpenseUpsertWithoutTravelExpensesInput
-  connect?: Prisma.ExpenseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutTravelExpensesInput, Prisma.ExpenseUpdateWithoutTravelExpensesInput>, Prisma.ExpenseUncheckedUpdateWithoutTravelExpensesInput>
-}
-
-export type ExpenseCreateNestedOneWithoutMealExpensesInput = {
-  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpensesInput, Prisma.ExpenseUncheckedCreateWithoutMealExpensesInput>
-  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutMealExpensesInput
+export type ExpenseCreateNestedOneWithoutTravelExpenseInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpenseInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpenseInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutTravelExpenseInput
   connect?: Prisma.ExpenseWhereUniqueInput
 }
 
-export type ExpenseUpdateOneRequiredWithoutMealExpensesNestedInput = {
-  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpensesInput, Prisma.ExpenseUncheckedCreateWithoutMealExpensesInput>
-  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutMealExpensesInput
-  upsert?: Prisma.ExpenseUpsertWithoutMealExpensesInput
+export type ExpenseUpdateOneRequiredWithoutTravelExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpenseInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpenseInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutTravelExpenseInput
+  upsert?: Prisma.ExpenseUpsertWithoutTravelExpenseInput
   connect?: Prisma.ExpenseWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutMealExpensesInput, Prisma.ExpenseUpdateWithoutMealExpensesInput>, Prisma.ExpenseUncheckedUpdateWithoutMealExpensesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutTravelExpenseInput, Prisma.ExpenseUpdateWithoutTravelExpenseInput>, Prisma.ExpenseUncheckedUpdateWithoutTravelExpenseInput>
+}
+
+export type ExpenseCreateNestedOneWithoutMealExpenseInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpenseInput, Prisma.ExpenseUncheckedCreateWithoutMealExpenseInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutMealExpenseInput
+  connect?: Prisma.ExpenseWhereUniqueInput
+}
+
+export type ExpenseUpdateOneRequiredWithoutMealExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpenseInput, Prisma.ExpenseUncheckedCreateWithoutMealExpenseInput>
+  connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutMealExpenseInput
+  upsert?: Prisma.ExpenseUpsertWithoutMealExpenseInput
+  connect?: Prisma.ExpenseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExpenseUpdateToOneWithWhereWithoutMealExpenseInput, Prisma.ExpenseUpdateWithoutMealExpenseInput>, Prisma.ExpenseUncheckedUpdateWithoutMealExpenseInput>
 }
 
 export type ExpenseCreateWithoutReportInput = {
@@ -624,9 +624,9 @@ export type ExpenseCreateWithoutReportInput = {
   type: $Enums.ExpenseType
   reasoning?: string | null
   costAccount: Prisma.CostAccountCreateNestedOneWithoutExpensesInput
-  receiptExpensees?: Prisma.ReceiptExpenseeCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUncheckedCreateWithoutReportInput = {
@@ -638,9 +638,9 @@ export type ExpenseUncheckedCreateWithoutReportInput = {
   type: $Enums.ExpenseType
   reasoning?: string | null
   costAccountId: string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseUncheckedCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseUncheckedCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseCreateOrConnectWithoutReportInput = {
@@ -693,9 +693,9 @@ export type ExpenseCreateWithoutCostAccountInput = {
   type: $Enums.ExpenseType
   reasoning?: string | null
   report: Prisma.ReportCreateNestedOneWithoutExpensesInput
-  receiptExpensees?: Prisma.ReceiptExpenseeCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseUncheckedCreateWithoutCostAccountInput = {
@@ -707,9 +707,9 @@ export type ExpenseUncheckedCreateWithoutCostAccountInput = {
   type: $Enums.ExpenseType
   reasoning?: string | null
   reportId: string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseUncheckedCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseUncheckedCreateNestedOneWithoutExpenseInput
 }
 
 export type ExpenseCreateOrConnectWithoutCostAccountInput = {
@@ -738,7 +738,7 @@ export type ExpenseUpdateManyWithWhereWithoutCostAccountInput = {
   data: Prisma.XOR<Prisma.ExpenseUpdateManyMutationInput, Prisma.ExpenseUncheckedUpdateManyWithoutCostAccountInput>
 }
 
-export type ExpenseCreateWithoutReceiptExpenseesInput = {
+export type ExpenseCreateWithoutReceiptExpenseInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -748,11 +748,11 @@ export type ExpenseCreateWithoutReceiptExpenseesInput = {
   reasoning?: string | null
   report: Prisma.ReportCreateNestedOneWithoutExpensesInput
   costAccount: Prisma.CostAccountCreateNestedOneWithoutExpensesInput
-  travelExpenses?: Prisma.TravelExpenseCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseCreateNestedManyWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseCreateNestedOneWithoutExpenseInput
 }
 
-export type ExpenseUncheckedCreateWithoutReceiptExpenseesInput = {
+export type ExpenseUncheckedCreateWithoutReceiptExpenseInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -762,27 +762,27 @@ export type ExpenseUncheckedCreateWithoutReceiptExpenseesInput = {
   reasoning?: string | null
   reportId: string
   costAccountId: string
-  travelExpenses?: Prisma.TravelExpenseUncheckedCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseUncheckedCreateNestedManyWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseUncheckedCreateNestedOneWithoutExpenseInput
 }
 
-export type ExpenseCreateOrConnectWithoutReceiptExpenseesInput = {
+export type ExpenseCreateOrConnectWithoutReceiptExpenseInput = {
   where: Prisma.ExpenseWhereUniqueInput
-  create: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseesInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseesInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseInput>
 }
 
-export type ExpenseUpsertWithoutReceiptExpenseesInput = {
-  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutReceiptExpenseesInput, Prisma.ExpenseUncheckedUpdateWithoutReceiptExpenseesInput>
-  create: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseesInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseesInput>
+export type ExpenseUpsertWithoutReceiptExpenseInput = {
+  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutReceiptExpenseInput, Prisma.ExpenseUncheckedUpdateWithoutReceiptExpenseInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutReceiptExpenseInput, Prisma.ExpenseUncheckedCreateWithoutReceiptExpenseInput>
   where?: Prisma.ExpenseWhereInput
 }
 
-export type ExpenseUpdateToOneWithWhereWithoutReceiptExpenseesInput = {
+export type ExpenseUpdateToOneWithWhereWithoutReceiptExpenseInput = {
   where?: Prisma.ExpenseWhereInput
-  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutReceiptExpenseesInput, Prisma.ExpenseUncheckedUpdateWithoutReceiptExpenseesInput>
+  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutReceiptExpenseInput, Prisma.ExpenseUncheckedUpdateWithoutReceiptExpenseInput>
 }
 
-export type ExpenseUpdateWithoutReceiptExpenseesInput = {
+export type ExpenseUpdateWithoutReceiptExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -792,11 +792,11 @@ export type ExpenseUpdateWithoutReceiptExpenseesInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report?: Prisma.ReportUpdateOneRequiredWithoutExpensesNestedInput
   costAccount?: Prisma.CostAccountUpdateOneRequiredWithoutExpensesNestedInput
-  travelExpenses?: Prisma.TravelExpenseUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUpdateManyWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUpdateOneWithoutExpenseNestedInput
 }
 
-export type ExpenseUncheckedUpdateWithoutReceiptExpenseesInput = {
+export type ExpenseUncheckedUpdateWithoutReceiptExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -806,11 +806,11 @@ export type ExpenseUncheckedUpdateWithoutReceiptExpenseesInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportId?: Prisma.StringFieldUpdateOperationsInput | string
   costAccountId?: Prisma.StringFieldUpdateOperationsInput | string
-  travelExpenses?: Prisma.TravelExpenseUncheckedUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUncheckedUpdateManyWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
-export type ExpenseCreateWithoutTravelExpensesInput = {
+export type ExpenseCreateWithoutTravelExpenseInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -820,11 +820,11 @@ export type ExpenseCreateWithoutTravelExpensesInput = {
   reasoning?: string | null
   report: Prisma.ReportCreateNestedOneWithoutExpensesInput
   costAccount: Prisma.CostAccountCreateNestedOneWithoutExpensesInput
-  receiptExpensees?: Prisma.ReceiptExpenseeCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseCreateNestedOneWithoutExpenseInput
 }
 
-export type ExpenseUncheckedCreateWithoutTravelExpensesInput = {
+export type ExpenseUncheckedCreateWithoutTravelExpenseInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -834,27 +834,27 @@ export type ExpenseUncheckedCreateWithoutTravelExpensesInput = {
   reasoning?: string | null
   reportId: string
   costAccountId: string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedCreateNestedManyWithoutExpenseInput
-  mealExpenses?: Prisma.MealExpenseUncheckedCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  mealExpense?: Prisma.MealExpenseUncheckedCreateNestedOneWithoutExpenseInput
 }
 
-export type ExpenseCreateOrConnectWithoutTravelExpensesInput = {
+export type ExpenseCreateOrConnectWithoutTravelExpenseInput = {
   where: Prisma.ExpenseWhereUniqueInput
-  create: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpensesInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpensesInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpenseInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpenseInput>
 }
 
-export type ExpenseUpsertWithoutTravelExpensesInput = {
-  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutTravelExpensesInput, Prisma.ExpenseUncheckedUpdateWithoutTravelExpensesInput>
-  create: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpensesInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpensesInput>
+export type ExpenseUpsertWithoutTravelExpenseInput = {
+  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutTravelExpenseInput, Prisma.ExpenseUncheckedUpdateWithoutTravelExpenseInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutTravelExpenseInput, Prisma.ExpenseUncheckedCreateWithoutTravelExpenseInput>
   where?: Prisma.ExpenseWhereInput
 }
 
-export type ExpenseUpdateToOneWithWhereWithoutTravelExpensesInput = {
+export type ExpenseUpdateToOneWithWhereWithoutTravelExpenseInput = {
   where?: Prisma.ExpenseWhereInput
-  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutTravelExpensesInput, Prisma.ExpenseUncheckedUpdateWithoutTravelExpensesInput>
+  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutTravelExpenseInput, Prisma.ExpenseUncheckedUpdateWithoutTravelExpenseInput>
 }
 
-export type ExpenseUpdateWithoutTravelExpensesInput = {
+export type ExpenseUpdateWithoutTravelExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -864,11 +864,11 @@ export type ExpenseUpdateWithoutTravelExpensesInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report?: Prisma.ReportUpdateOneRequiredWithoutExpensesNestedInput
   costAccount?: Prisma.CostAccountUpdateOneRequiredWithoutExpensesNestedInput
-  receiptExpensees?: Prisma.ReceiptExpenseeUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUpdateOneWithoutExpenseNestedInput
 }
 
-export type ExpenseUncheckedUpdateWithoutTravelExpensesInput = {
+export type ExpenseUncheckedUpdateWithoutTravelExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -878,11 +878,11 @@ export type ExpenseUncheckedUpdateWithoutTravelExpensesInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportId?: Prisma.StringFieldUpdateOperationsInput | string
   costAccountId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUncheckedUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
-export type ExpenseCreateWithoutMealExpensesInput = {
+export type ExpenseCreateWithoutMealExpenseInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -892,11 +892,11 @@ export type ExpenseCreateWithoutMealExpensesInput = {
   reasoning?: string | null
   report: Prisma.ReportCreateNestedOneWithoutExpensesInput
   costAccount: Prisma.CostAccountCreateNestedOneWithoutExpensesInput
-  receiptExpensees?: Prisma.ReceiptExpenseeCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseCreateNestedOneWithoutExpenseInput
 }
 
-export type ExpenseUncheckedCreateWithoutMealExpensesInput = {
+export type ExpenseUncheckedCreateWithoutMealExpenseInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -906,27 +906,27 @@ export type ExpenseUncheckedCreateWithoutMealExpensesInput = {
   reasoning?: string | null
   reportId: string
   costAccountId: string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedCreateNestedManyWithoutExpenseInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedCreateNestedManyWithoutExpenseInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedCreateNestedOneWithoutExpenseInput
+  travelExpense?: Prisma.TravelExpenseUncheckedCreateNestedOneWithoutExpenseInput
 }
 
-export type ExpenseCreateOrConnectWithoutMealExpensesInput = {
+export type ExpenseCreateOrConnectWithoutMealExpenseInput = {
   where: Prisma.ExpenseWhereUniqueInput
-  create: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpensesInput, Prisma.ExpenseUncheckedCreateWithoutMealExpensesInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpenseInput, Prisma.ExpenseUncheckedCreateWithoutMealExpenseInput>
 }
 
-export type ExpenseUpsertWithoutMealExpensesInput = {
-  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutMealExpensesInput, Prisma.ExpenseUncheckedUpdateWithoutMealExpensesInput>
-  create: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpensesInput, Prisma.ExpenseUncheckedCreateWithoutMealExpensesInput>
+export type ExpenseUpsertWithoutMealExpenseInput = {
+  update: Prisma.XOR<Prisma.ExpenseUpdateWithoutMealExpenseInput, Prisma.ExpenseUncheckedUpdateWithoutMealExpenseInput>
+  create: Prisma.XOR<Prisma.ExpenseCreateWithoutMealExpenseInput, Prisma.ExpenseUncheckedCreateWithoutMealExpenseInput>
   where?: Prisma.ExpenseWhereInput
 }
 
-export type ExpenseUpdateToOneWithWhereWithoutMealExpensesInput = {
+export type ExpenseUpdateToOneWithWhereWithoutMealExpenseInput = {
   where?: Prisma.ExpenseWhereInput
-  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutMealExpensesInput, Prisma.ExpenseUncheckedUpdateWithoutMealExpensesInput>
+  data: Prisma.XOR<Prisma.ExpenseUpdateWithoutMealExpenseInput, Prisma.ExpenseUncheckedUpdateWithoutMealExpenseInput>
 }
 
-export type ExpenseUpdateWithoutMealExpensesInput = {
+export type ExpenseUpdateWithoutMealExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -936,11 +936,11 @@ export type ExpenseUpdateWithoutMealExpensesInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report?: Prisma.ReportUpdateOneRequiredWithoutExpensesNestedInput
   costAccount?: Prisma.CostAccountUpdateOneRequiredWithoutExpensesNestedInput
-  receiptExpensees?: Prisma.ReceiptExpenseeUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUpdateOneWithoutExpenseNestedInput
 }
 
-export type ExpenseUncheckedUpdateWithoutMealExpensesInput = {
+export type ExpenseUncheckedUpdateWithoutMealExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -950,8 +950,8 @@ export type ExpenseUncheckedUpdateWithoutMealExpensesInput = {
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportId?: Prisma.StringFieldUpdateOperationsInput | string
   costAccountId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseCreateManyReportInput = {
@@ -974,9 +974,9 @@ export type ExpenseUpdateWithoutReportInput = {
   type?: Prisma.EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costAccount?: Prisma.CostAccountUpdateOneRequiredWithoutExpensesNestedInput
-  receiptExpensees?: Prisma.ReceiptExpenseeUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateWithoutReportInput = {
@@ -988,9 +988,9 @@ export type ExpenseUncheckedUpdateWithoutReportInput = {
   type?: Prisma.EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   costAccountId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUncheckedUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateManyWithoutReportInput = {
@@ -1024,9 +1024,9 @@ export type ExpenseUpdateWithoutCostAccountInput = {
   type?: Prisma.EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   report?: Prisma.ReportUpdateOneRequiredWithoutExpensesNestedInput
-  receiptExpensees?: Prisma.ReceiptExpenseeUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateWithoutCostAccountInput = {
@@ -1038,9 +1038,9 @@ export type ExpenseUncheckedUpdateWithoutCostAccountInput = {
   type?: Prisma.EnumExpenseTypeFieldUpdateOperationsInput | $Enums.ExpenseType
   reasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reportId?: Prisma.StringFieldUpdateOperationsInput | string
-  receiptExpensees?: Prisma.ReceiptExpenseeUncheckedUpdateManyWithoutExpenseNestedInput
-  travelExpenses?: Prisma.TravelExpenseUncheckedUpdateManyWithoutExpenseNestedInput
-  mealExpenses?: Prisma.MealExpenseUncheckedUpdateManyWithoutExpenseNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  travelExpense?: Prisma.TravelExpenseUncheckedUpdateOneWithoutExpenseNestedInput
+  mealExpense?: Prisma.MealExpenseUncheckedUpdateOneWithoutExpenseNestedInput
 }
 
 export type ExpenseUncheckedUpdateManyWithoutCostAccountInput = {
@@ -1055,53 +1055,6 @@ export type ExpenseUncheckedUpdateManyWithoutCostAccountInput = {
 }
 
 
-/**
- * Count Type ExpenseCountOutputType
- */
-
-export type ExpenseCountOutputType = {
-  receiptExpensees: number
-  travelExpenses: number
-  mealExpenses: number
-}
-
-export type ExpenseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  receiptExpensees?: boolean | ExpenseCountOutputTypeCountReceiptExpenseesArgs
-  travelExpenses?: boolean | ExpenseCountOutputTypeCountTravelExpensesArgs
-  mealExpenses?: boolean | ExpenseCountOutputTypeCountMealExpensesArgs
-}
-
-/**
- * ExpenseCountOutputType without action
- */
-export type ExpenseCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ExpenseCountOutputType
-   */
-  select?: Prisma.ExpenseCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * ExpenseCountOutputType without action
- */
-export type ExpenseCountOutputTypeCountReceiptExpenseesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReceiptExpenseeWhereInput
-}
-
-/**
- * ExpenseCountOutputType without action
- */
-export type ExpenseCountOutputTypeCountTravelExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TravelExpenseWhereInput
-}
-
-/**
- * ExpenseCountOutputType without action
- */
-export type ExpenseCountOutputTypeCountMealExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MealExpenseWhereInput
-}
-
 
 export type ExpenseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1115,10 +1068,9 @@ export type ExpenseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   costAccountId?: boolean
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
   costAccount?: boolean | Prisma.CostAccountDefaultArgs<ExtArgs>
-  receiptExpensees?: boolean | Prisma.Expense$receiptExpenseesArgs<ExtArgs>
-  travelExpenses?: boolean | Prisma.Expense$travelExpensesArgs<ExtArgs>
-  mealExpenses?: boolean | Prisma.Expense$mealExpensesArgs<ExtArgs>
-  _count?: boolean | Prisma.ExpenseCountOutputTypeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.Expense$receiptExpenseArgs<ExtArgs>
+  travelExpense?: boolean | Prisma.Expense$travelExpenseArgs<ExtArgs>
+  mealExpense?: boolean | Prisma.Expense$mealExpenseArgs<ExtArgs>
 }, ExtArgs["result"]["expense"]>
 
 export type ExpenseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1165,10 +1117,9 @@ export type ExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ExpenseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
   costAccount?: boolean | Prisma.CostAccountDefaultArgs<ExtArgs>
-  receiptExpensees?: boolean | Prisma.Expense$receiptExpenseesArgs<ExtArgs>
-  travelExpenses?: boolean | Prisma.Expense$travelExpensesArgs<ExtArgs>
-  mealExpenses?: boolean | Prisma.Expense$mealExpensesArgs<ExtArgs>
-  _count?: boolean | Prisma.ExpenseCountOutputTypeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.Expense$receiptExpenseArgs<ExtArgs>
+  travelExpense?: boolean | Prisma.Expense$travelExpenseArgs<ExtArgs>
+  mealExpense?: boolean | Prisma.Expense$mealExpenseArgs<ExtArgs>
 }
 export type ExpenseIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.ReportDefaultArgs<ExtArgs>
@@ -1184,9 +1135,9 @@ export type $ExpensePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     report: Prisma.$ReportPayload<ExtArgs>
     costAccount: Prisma.$CostAccountPayload<ExtArgs>
-    receiptExpensees: Prisma.$ReceiptExpenseePayload<ExtArgs>[]
-    travelExpenses: Prisma.$TravelExpensePayload<ExtArgs>[]
-    mealExpenses: Prisma.$MealExpensePayload<ExtArgs>[]
+    receiptExpense: Prisma.$ReceiptExpensePayload<ExtArgs> | null
+    travelExpense: Prisma.$TravelExpensePayload<ExtArgs> | null
+    mealExpense: Prisma.$MealExpensePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1594,9 +1545,9 @@ export interface Prisma__ExpenseClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   report<T extends Prisma.ReportDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReportDefaultArgs<ExtArgs>>): Prisma.Prisma__ReportClient<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   costAccount<T extends Prisma.CostAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CostAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__CostAccountClient<runtime.Types.Result.GetResult<Prisma.$CostAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  receiptExpensees<T extends Prisma.Expense$receiptExpenseesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$receiptExpenseesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReceiptExpenseePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  travelExpenses<T extends Prisma.Expense$travelExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$travelExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TravelExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  mealExpenses<T extends Prisma.Expense$mealExpensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$mealExpensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MealExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  receiptExpense<T extends Prisma.Expense$receiptExpenseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$receiptExpenseArgs<ExtArgs>>): Prisma.Prisma__ReceiptExpenseClient<runtime.Types.Result.GetResult<Prisma.$ReceiptExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  travelExpense<T extends Prisma.Expense$travelExpenseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$travelExpenseArgs<ExtArgs>>): Prisma.Prisma__TravelExpenseClient<runtime.Types.Result.GetResult<Prisma.$TravelExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  mealExpense<T extends Prisma.Expense$mealExpenseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Expense$mealExpenseArgs<ExtArgs>>): Prisma.Prisma__MealExpenseClient<runtime.Types.Result.GetResult<Prisma.$MealExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2031,33 +1982,28 @@ export type ExpenseDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Expense.receiptExpensees
+ * Expense.receiptExpense
  */
-export type Expense$receiptExpenseesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Expense$receiptExpenseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ReceiptExpensee
+   * Select specific fields to fetch from the ReceiptExpense
    */
-  select?: Prisma.ReceiptExpenseeSelect<ExtArgs> | null
+  select?: Prisma.ReceiptExpenseSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ReceiptExpensee
+   * Omit specific fields from the ReceiptExpense
    */
-  omit?: Prisma.ReceiptExpenseeOmit<ExtArgs> | null
+  omit?: Prisma.ReceiptExpenseOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReceiptExpenseeInclude<ExtArgs> | null
-  where?: Prisma.ReceiptExpenseeWhereInput
-  orderBy?: Prisma.ReceiptExpenseeOrderByWithRelationInput | Prisma.ReceiptExpenseeOrderByWithRelationInput[]
-  cursor?: Prisma.ReceiptExpenseeWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ReceiptExpenseeScalarFieldEnum | Prisma.ReceiptExpenseeScalarFieldEnum[]
+  include?: Prisma.ReceiptExpenseInclude<ExtArgs> | null
+  where?: Prisma.ReceiptExpenseWhereInput
 }
 
 /**
- * Expense.travelExpenses
+ * Expense.travelExpense
  */
-export type Expense$travelExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Expense$travelExpenseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TravelExpense
    */
@@ -2071,17 +2017,12 @@ export type Expense$travelExpensesArgs<ExtArgs extends runtime.Types.Extensions.
    */
   include?: Prisma.TravelExpenseInclude<ExtArgs> | null
   where?: Prisma.TravelExpenseWhereInput
-  orderBy?: Prisma.TravelExpenseOrderByWithRelationInput | Prisma.TravelExpenseOrderByWithRelationInput[]
-  cursor?: Prisma.TravelExpenseWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.TravelExpenseScalarFieldEnum | Prisma.TravelExpenseScalarFieldEnum[]
 }
 
 /**
- * Expense.mealExpenses
+ * Expense.mealExpense
  */
-export type Expense$mealExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Expense$mealExpenseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MealExpense
    */
@@ -2095,11 +2036,6 @@ export type Expense$mealExpensesArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.MealExpenseInclude<ExtArgs> | null
   where?: Prisma.MealExpenseWhereInput
-  orderBy?: Prisma.MealExpenseOrderByWithRelationInput | Prisma.MealExpenseOrderByWithRelationInput[]
-  cursor?: Prisma.MealExpenseWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MealExpenseScalarFieldEnum | Prisma.MealExpenseScalarFieldEnum[]
 }
 
 /**

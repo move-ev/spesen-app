@@ -44,6 +44,24 @@ export const reportRouter = createTRPCRouter({
         ),
       };
     }),
+  getExpenses: protectedProcedure
+    .input(getReportByIdSchema)
+    .query(async ({ ctx, input }) => {
+      const expenses = await ctx.db.expense.findMany({
+        where: {
+          reportId: input.id,
+        },
+      });
+
+      if (!expenses) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Expenses not found",
+        });
+      }
+
+      return expenses;
+    }),
   getById: protectedProcedure
     .input(getReportByIdSchema)
     .query(async ({ ctx, input }) => {
