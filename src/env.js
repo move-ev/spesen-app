@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs'
+import { z } from 'zod'
 
 export const env = createEnv({
   /**
@@ -8,14 +8,14 @@ export const env = createEnv({
    */
   server: {
     BETTER_AUTH_SECRET:
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === 'production'
         ? z.string()
         : z.string().optional(),
     BETTER_AUTH_URL: z.url(),
     DATABASE_URL: z.url(),
     NODE_ENV: z
-      .enum(["development", "test", "production"])
-      .default("development"),
+      .enum(['development', 'test', 'production'])
+      .default('development'),
 
     MICROSOFT_CLIENT_ID: z.string(),
     MICROSOFT_CLIENT_SECRET: z.string(),
@@ -52,4 +52,4 @@ export const env = createEnv({
    * `SOME_VAR=''` will throw an error.
    */
   emptyStringAsUndefined: true,
-});
+})

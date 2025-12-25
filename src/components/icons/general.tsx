@@ -1,4 +1,4 @@
-import { Building2Icon, FolderTreeIcon } from "lucide-react";
+import { Building2Icon, FolderTreeIcon } from 'lucide-react'
 
-export const BusinessUnitIcon = Building2Icon;
-export const AccountingUnitIcon = FolderTreeIcon;
+export const BusinessUnitIcon = Building2Icon
+export const AccountingUnitIcon = FolderTreeIcon

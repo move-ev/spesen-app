@@ -1,7 +1,8 @@
-import { CreateBusinessUnitForm } from "@/components/forms/create-business-unit";
-import { PageTitle } from "@/components/page-title";
-import { BusinessUnitsTable } from "@/components/tables/business-units";
-import { Button } from "@/components/ui/button";
+import { PlusIcon } from 'lucide-react'
+import { CreateBusinessUnitForm } from '@/components/forms/create-business-unit'
+import { PageTitle } from '@/components/page-title'
+import { BusinessUnitsTable } from '@/components/tables/business-units'
+import { Button } from '@/components/ui/button'
 import {
   Sheet,
   SheetContent,
@@ -9,12 +10,11 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { api } from "@/trpc/server";
-import { PlusIcon } from "lucide-react";
+} from '@/components/ui/sheet'
+import { api } from '@/trpc/server'
 
 export default async function ServerPage() {
-  void api.businessUnit.list.prefetch();
+  void api.businessUnit.list.prefetch()
 
   return (
     <div>
@@ -22,7 +22,7 @@ export default async function ServerPage() {
         <PageTitle>Geschäftseinheiten</PageTitle>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant={"outline"}>
+            <Button variant={'outline'}>
               <PlusIcon />
               Geschäftseinheit erstellen
             </Button>
@@ -44,5 +44,5 @@ export default async function ServerPage() {
         <BusinessUnitsTable />
       </div>
     </div>
-  );
+  )
 }

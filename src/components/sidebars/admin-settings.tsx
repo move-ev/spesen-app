@@ -1,6 +1,6 @@
-import { ADMIN_SETTINGS_ROUTES } from "@/lib/routes";
-import Link from "next/link";
-import { AccountingUnitIcon, BusinessUnitIcon } from "../icons/general";
+import Link from 'next/link'
+import { ADMIN_SETTINGS_ROUTES } from '@/lib/routes'
+import { AccountingUnitIcon, BusinessUnitIcon } from '../icons/general'
 import {
   Sidebar,
   SidebarContent,
@@ -9,20 +9,20 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-} from "../ui/sidebar";
+} from '../ui/sidebar'
 
 const routes = [
   {
     href: ADMIN_SETTINGS_ROUTES.BUSINESS_UNIT,
-    label: "Geschäftseinheiten",
+    label: 'Geschäftseinheiten',
     icon: BusinessUnitIcon,
   },
   {
     href: ADMIN_SETTINGS_ROUTES.ACCOUNTING_UNIT,
-    label: "Kostenstellen",
+    label: 'Kostenstellen',
     icon: AccountingUnitIcon,
   },
-];
+]
 
 export default async function AdminSettingsSidebar({
   ...props
@@ -46,5 +46,5 @@ export default async function AdminSettingsSidebar({
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  );
+  )
 }

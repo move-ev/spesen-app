@@ -1,6 +1,6 @@
-import AdminSettingsSidebar from "@/components/sidebars/admin-settings";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import type React from "react";
+import type React from 'react'
+import AdminSettingsSidebar from '@/components/sidebars/admin-settings'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 /**
  * This layout is only responsible for wrapping the admin settings routes.
@@ -17,5 +17,5 @@ export default async function ServerLayout({
         <section className="mx-auto w-full max-w-4xl px-8">{children}</section>
       </main>
     </SidebarProvider>
-  );
+  )
 }

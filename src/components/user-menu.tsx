@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { api } from "@/trpc/react";
-import { LogOutIcon } from "lucide-react";
-import { Button } from "./ui/button";
+import { LogOutIcon } from 'lucide-react'
+import { api } from '@/trpc/react'
+import { Button } from './ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,16 +10,16 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { UserAvatar } from "./user-avatar";
+} from './ui/dropdown-menu'
+import { UserAvatar } from './user-avatar'
 
 export function UserMenu({ ...props }: React.ComponentProps<typeof Button>) {
-  const [session] = api.auth.getCurrentSession.useSuspenseQuery();
+  const [session] = api.auth.getCurrentSession.useSuspenseQuery()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"ghost"} size={"icon"} {...props}>
+        <Button variant={'ghost'} size={'icon'} {...props}>
           <UserAvatar user={session.user} className="size-5" />
         </Button>
       </DropdownMenuTrigger>
@@ -38,5 +38,5 @@ export function UserMenu({ ...props }: React.ComponentProps<typeof Button>) {
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
