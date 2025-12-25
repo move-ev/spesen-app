@@ -1,7 +1,8 @@
-import { CreateAccountingUnitForm } from "@/components/forms/create-accounting-unit";
-import { PageTitle } from "@/components/page-title";
-import { AccountingUnitsTable } from "@/components/tables/accounting-units";
-import { Button } from "@/components/ui/button";
+import { PlusIcon } from 'lucide-react'
+import { CreateAccountingUnitForm } from '@/components/forms/create-accounting-unit'
+import { PageTitle } from '@/components/page-title'
+import { AccountingUnitsTable } from '@/components/tables/accounting-units'
+import { Button } from '@/components/ui/button'
 import {
   Sheet,
   SheetContent,
@@ -9,12 +10,11 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { api } from "@/trpc/server";
-import { PlusIcon } from "lucide-react";
+} from '@/components/ui/sheet'
+import { api } from '@/trpc/server'
 
 export default async function ServerPage() {
-  void api.accountingUnit.list.prefetch();
+  void api.accountingUnit.list.prefetch()
 
   return (
     <div>
@@ -22,7 +22,7 @@ export default async function ServerPage() {
         <PageTitle>Kostenstellen</PageTitle>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant={"outline"}>
+            <Button variant={'outline'}>
               <PlusIcon />
               Kostenstelle erstellen
             </Button>
@@ -44,5 +44,5 @@ export default async function ServerPage() {
         <AccountingUnitsTable />
       </div>
     </div>
-  );
+  )
 }

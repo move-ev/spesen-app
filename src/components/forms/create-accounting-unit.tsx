@@ -1,46 +1,46 @@
-"use client";
+'use client'
 
-import { createAccountingUnitSchema } from "@/lib/validators";
-import { api } from "@/trpc/react";
-import { useForm } from "@tanstack/react-form";
-import { Loader2Icon } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { useForm } from '@tanstack/react-form'
+import { Loader2Icon } from 'lucide-react'
+import { toast } from 'sonner'
+import { createAccountingUnitSchema } from '@/lib/validators'
+import { api } from '@/trpc/react'
+import { Button } from '../ui/button'
+import { Field, FieldError, FieldGroup, FieldLabel } from '../ui/field'
+import { Input } from '../ui/input'
 
 export function CreateAccountingUnitForm() {
-  const utils = api.useUtils();
+  const utils = api.useUtils()
   const createAccountingUnit = api.accountingUnit.create.useMutation({
     onSuccess: () => {
-      utils.accountingUnit.list.invalidate();
-      form.reset();
+      utils.accountingUnit.list.invalidate()
+      form.reset()
     },
     onError: (error) => {
-      toast.error("Ein Fehler ist aufgetreten", {
-        description: error.message ?? "Ein unerwarteter Fehler ist aufgetreten",
-      });
+      toast.error('Ein Fehler ist aufgetreten', {
+        description: error.message ?? 'Ein unerwarteter Fehler ist aufgetreten',
+      })
     },
-  });
+  })
 
   const form = useForm({
     defaultValues: {
-      name: "",
+      name: '',
     },
     validators: {
       onSubmit: createAccountingUnitSchema,
     },
     onSubmit: async ({ value }) => {
-      createAccountingUnit.mutate(value);
+      createAccountingUnit.mutate(value)
     },
-  });
+  })
 
   return (
     <form
       id="create-accounting-unit-form"
       onSubmit={(e) => {
-        e.preventDefault();
-        form.handleSubmit();
+        e.preventDefault()
+        form.handleSubmit()
       }}
     >
       <FieldGroup>
@@ -48,7 +48,7 @@ export function CreateAccountingUnitForm() {
           name="name"
           children={(field) => {
             const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+              field.state.meta.isTouched && !field.state.meta.isValid
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>Name</FieldLabel>
@@ -64,7 +64,7 @@ export function CreateAccountingUnitForm() {
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
-            );
+            )
           }}
         />
         <Button
@@ -80,5 +80,5 @@ export function CreateAccountingUnitForm() {
         </Button>
       </FieldGroup>
     </form>
-  );
+  )
 }

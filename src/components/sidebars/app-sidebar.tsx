@@ -1,9 +1,9 @@
-import { ADMIN_SETTINGS_ROUTES, APP_ROUTES } from "@/lib/routes";
-import { auth } from "@/server/better-auth";
-import { HomeIcon, SettingsIcon, ShieldIcon } from "lucide-react";
-import { headers } from "next/headers";
-import Link from "next/link";
-import { Suspense } from "react";
+import { HomeIcon, SettingsIcon, ShieldIcon } from 'lucide-react'
+import { headers } from 'next/headers'
+import Link from 'next/link'
+import { Suspense } from 'react'
+import { ADMIN_SETTINGS_ROUTES, APP_ROUTES } from '@/lib/routes'
+import { auth } from '@/server/better-auth'
 import {
   Sidebar,
   SidebarContent,
@@ -12,15 +12,15 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-} from "../ui/sidebar";
+} from '../ui/sidebar'
 
 const routes = [
   {
     href: APP_ROUTES.HOME,
-    label: "Dashboard",
+    label: 'Dashboard',
     icon: HomeIcon,
   },
-];
+]
 export default async function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
@@ -48,31 +48,31 @@ export default async function AppSidebar({
         </Suspense>
       </SidebarContent>
     </Sidebar>
-  );
+  )
 }
 
 const adminRoutes = [
   {
     href: APP_ROUTES.ADMIN,
-    label: "Admin",
+    label: 'Admin',
     icon: ShieldIcon,
   },
   {
     href: ADMIN_SETTINGS_ROUTES.BUSINESS_UNIT,
-    label: "Einstellungen",
+    label: 'Einstellungen',
     icon: SettingsIcon,
   },
-];
+]
 
 async function AdminSidebarSection({
   ...props
 }: React.ComponentProps<typeof SidebarGroup>) {
   const session = await auth.api.getSession({
     headers: await headers(),
-  });
+  })
 
-  if (session?.user?.role !== "admin") {
-    return <p>Keine Berechtigung</p>;
+  if (session?.user?.role !== 'admin') {
+    return <p>Keine Berechtigung</p>
   }
 
   return (
@@ -89,5 +89,5 @@ async function AdminSidebarSection({
         ))}
       </SidebarMenu>
     </SidebarGroup>
-  );
+  )
 }

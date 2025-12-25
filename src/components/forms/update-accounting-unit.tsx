@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import { updateAccountingUnitSchema } from "@/lib/validators";
-import { api } from "@/trpc/react";
-import { useForm } from "@tanstack/react-form";
-import type { AccountingUnit } from "generated/prisma/client";
-import { Loader2Icon } from "lucide-react";
-import type React from "react";
-import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
+import { useForm } from '@tanstack/react-form'
+import type { AccountingUnit } from 'generated/prisma/client'
+import { Loader2Icon } from 'lucide-react'
+import type React from 'react'
+import { toast } from 'sonner'
+import { updateAccountingUnitSchema } from '@/lib/validators'
+import { api } from '@/trpc/react'
+import { Button } from '../ui/button'
+import { Field, FieldError, FieldGroup, FieldLabel } from '../ui/field'
+import { Input } from '../ui/input'
 
 export function UpdateAccountingUnitForm({
   unit,
   ...props
-}: React.ComponentProps<"form"> & {
-  unit: AccountingUnit;
+}: React.ComponentProps<'form'> & {
+  unit: AccountingUnit
 }) {
-  const utils = api.useUtils();
+  const utils = api.useUtils()
 
   const updateAccountingUnit = api.accountingUnit.update.useMutation({
     onSuccess: () => {
-      utils.accountingUnit.list.invalidate();
-      form.reset();
+      utils.accountingUnit.list.invalidate()
+      form.reset()
     },
     onError: (error) => {
-      toast.error("Ein Fehler ist aufgetreten", {
-        description: error.message ?? "Ein unerwarteter Fehler ist aufgetreten",
-      });
+      toast.error('Ein Fehler ist aufgetreten', {
+        description: error.message ?? 'Ein unerwarteter Fehler ist aufgetreten',
+      })
     },
-  });
+  })
 
   const deleteAccountingUnit = api.accountingUnit.delete.useMutation({
     onSuccess: () => {
-      utils.accountingUnit.list.invalidate();
-      form.reset();
+      utils.accountingUnit.list.invalidate()
+      form.reset()
     },
     onError: (error) => {
-      toast.error("Ein Fehler ist aufgetreten", {
-        description: error.message ?? "Ein unerwarteter Fehler ist aufgetreten",
-      });
+      toast.error('Ein Fehler ist aufgetreten', {
+        description: error.message ?? 'Ein unerwarteter Fehler ist aufgetreten',
+      })
     },
-  });
+  })
 
   const form = useForm({
     defaultValues: {
@@ -52,16 +52,16 @@ export function UpdateAccountingUnitForm({
       onSubmit: updateAccountingUnitSchema,
     },
     onSubmit: async ({ value }) => {
-      updateAccountingUnit.mutate(value);
+      updateAccountingUnit.mutate(value)
     },
-  });
+  })
 
   return (
     <form
       id="update-accounting-unit-form"
       onSubmit={(e) => {
-        e.preventDefault();
-        form.handleSubmit();
+        e.preventDefault()
+        form.handleSubmit()
       }}
       {...props}
     >
@@ -70,7 +70,7 @@ export function UpdateAccountingUnitForm({
           name="name"
           children={(field) => {
             const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+              field.state.meta.isTouched && !field.state.meta.isValid
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>Name</FieldLabel>
@@ -86,7 +86,7 @@ export function UpdateAccountingUnitForm({
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
-            );
+            )
           }}
         />
         <Button
@@ -104,7 +104,7 @@ export function UpdateAccountingUnitForm({
         </Button>
         <Button
           type="button"
-          variant={"destructive"}
+          variant={'destructive'}
           onClick={() => deleteAccountingUnit.mutate({ id: unit.id })}
           disabled={
             deleteAccountingUnit.isPending || updateAccountingUnit.isPending
@@ -118,5 +118,5 @@ export function UpdateAccountingUnitForm({
         </Button>
       </FieldGroup>
     </form>
-  );
+  )
 }

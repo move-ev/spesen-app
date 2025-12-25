@@ -36,7 +36,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
-, "commitlint.config.mjs"  ],
+    ".next/types/**/*.ts",
+    "commitlint.config.mjs"
+  ],
   "exclude": ["node_modules", "generated"]
 }
