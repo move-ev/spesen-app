@@ -1,7 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "files": { "ignoreUnknown": false },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!!**/generated", "!.next"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -13,13 +16,11 @@
     "bracketSameLine": false,
     "bracketSpacing": true,
     "expand": "auto",
-    "useEditorconfig": true,
-    "includes": ["**", "!**/generated/"]
+    "useEditorconfig": true
   },
   "linter": {
     "enabled": true,
-    "rules": { "recommended": false },
-    "includes": ["**", "!.next", "!**/generated/"]
+    "rules": { "recommended": false }
   },
   "javascript": {
     "formatter": {
