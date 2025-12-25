@@ -19,7 +19,7 @@
   "linter": {
     "enabled": true,
     "rules": { "recommended": false },
-    "includes": ["**", "!.next"]
+    "includes": ["**", "!.next", "!**/generated/"]
   },
   "javascript": {
     "formatter": {
@@ -39,6 +39,11 @@
     "formatter": {
       "indentScriptAndStyle": false,
       "selfCloseVoidElements": "always"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   },
   "overrides": [
