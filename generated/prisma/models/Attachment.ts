@@ -166,14 +166,14 @@ export type AttachmentWhereInput = {
   id?: Prisma.StringFilter<"Attachment"> | string
   url?: Prisma.StringFilter<"Attachment"> | string
   receiptExpenseId?: Prisma.StringFilter<"Attachment"> | string
-  receiptExpense?: Prisma.XOR<Prisma.ReceiptExpenseeScalarRelationFilter, Prisma.ReceiptExpenseeWhereInput>
+  receiptExpense?: Prisma.XOR<Prisma.ReceiptExpenseScalarRelationFilter, Prisma.ReceiptExpenseWhereInput>
 }
 
 export type AttachmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   url?: Prisma.SortOrder
   receiptExpenseId?: Prisma.SortOrder
-  receiptExpense?: Prisma.ReceiptExpenseeOrderByWithRelationInput
+  receiptExpense?: Prisma.ReceiptExpenseOrderByWithRelationInput
 }
 
 export type AttachmentWhereUniqueInput = Prisma.AtLeast<{
@@ -183,7 +183,7 @@ export type AttachmentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.AttachmentWhereInput | Prisma.AttachmentWhereInput[]
   url?: Prisma.StringFilter<"Attachment"> | string
   receiptExpenseId?: Prisma.StringFilter<"Attachment"> | string
-  receiptExpense?: Prisma.XOR<Prisma.ReceiptExpenseeScalarRelationFilter, Prisma.ReceiptExpenseeWhereInput>
+  receiptExpense?: Prisma.XOR<Prisma.ReceiptExpenseScalarRelationFilter, Prisma.ReceiptExpenseWhereInput>
 }, "id">
 
 export type AttachmentOrderByWithAggregationInput = {
@@ -207,7 +207,7 @@ export type AttachmentScalarWhereWithAggregatesInput = {
 export type AttachmentCreateInput = {
   id?: string
   url: string
-  receiptExpense: Prisma.ReceiptExpenseeCreateNestedOneWithoutAttachmentsInput
+  receiptExpense: Prisma.ReceiptExpenseCreateNestedOneWithoutAttachmentsInput
 }
 
 export type AttachmentUncheckedCreateInput = {
@@ -219,7 +219,7 @@ export type AttachmentUncheckedCreateInput = {
 export type AttachmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  receiptExpense?: Prisma.ReceiptExpenseeUpdateOneRequiredWithoutAttachmentsNestedInput
+  receiptExpense?: Prisma.ReceiptExpenseUpdateOneRequiredWithoutAttachmentsNestedInput
 }
 
 export type AttachmentUncheckedUpdateInput = {
@@ -386,21 +386,21 @@ export type AttachmentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   url?: boolean
   receiptExpenseId?: boolean
-  receiptExpense?: boolean | Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.ReceiptExpenseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attachment"]>
 
 export type AttachmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   url?: boolean
   receiptExpenseId?: boolean
-  receiptExpense?: boolean | Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.ReceiptExpenseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attachment"]>
 
 export type AttachmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   url?: boolean
   receiptExpenseId?: boolean
-  receiptExpense?: boolean | Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.ReceiptExpenseDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attachment"]>
 
 export type AttachmentSelectScalar = {
@@ -411,19 +411,19 @@ export type AttachmentSelectScalar = {
 
 export type AttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "receiptExpenseId", ExtArgs["result"]["attachment"]>
 export type AttachmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  receiptExpense?: boolean | Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.ReceiptExpenseDefaultArgs<ExtArgs>
 }
 export type AttachmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  receiptExpense?: boolean | Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.ReceiptExpenseDefaultArgs<ExtArgs>
 }
 export type AttachmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  receiptExpense?: boolean | Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>
+  receiptExpense?: boolean | Prisma.ReceiptExpenseDefaultArgs<ExtArgs>
 }
 
 export type $AttachmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Attachment"
   objects: {
-    receiptExpense: Prisma.$ReceiptExpenseePayload<ExtArgs>
+    receiptExpense: Prisma.$ReceiptExpensePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -823,7 +823,7 @@ readonly fields: AttachmentFieldRefs;
  */
 export interface Prisma__AttachmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  receiptExpense<T extends Prisma.ReceiptExpenseeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReceiptExpenseeDefaultArgs<ExtArgs>>): Prisma.Prisma__ReceiptExpenseeClient<runtime.Types.Result.GetResult<Prisma.$ReceiptExpenseePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  receiptExpense<T extends Prisma.ReceiptExpenseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ReceiptExpenseDefaultArgs<ExtArgs>>): Prisma.Prisma__ReceiptExpenseClient<runtime.Types.Result.GetResult<Prisma.$ReceiptExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

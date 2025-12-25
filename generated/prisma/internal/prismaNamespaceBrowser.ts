@@ -57,7 +57,7 @@ export const ModelName = {
   CostAccount: 'CostAccount',
   Comment: 'Comment',
   Expense: 'Expense',
-  ReceiptExpensee: 'ReceiptExpensee',
+  ReceiptExpense: 'ReceiptExpense',
   Attachment: 'Attachment',
   TravelExpense: 'TravelExpense',
   MealExpense: 'MealExpense',
@@ -156,12 +156,12 @@ export const ExpenseScalarFieldEnum = {
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
 
 
-export const ReceiptExpenseeScalarFieldEnum = {
+export const ReceiptExpenseScalarFieldEnum = {
   id: 'id',
   expenseId: 'expenseId'
 } as const
 
-export type ReceiptExpenseeScalarFieldEnum = (typeof ReceiptExpenseeScalarFieldEnum)[keyof typeof ReceiptExpenseeScalarFieldEnum]
+export type ReceiptExpenseScalarFieldEnum = (typeof ReceiptExpenseScalarFieldEnum)[keyof typeof ReceiptExpenseScalarFieldEnum]
 
 
 export const AttachmentScalarFieldEnum = {

@@ -238,15 +238,15 @@ export type MealExpenseOrderByWithRelationInput = {
 
 export type MealExpenseWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  expenseId?: string
   AND?: Prisma.MealExpenseWhereInput | Prisma.MealExpenseWhereInput[]
   OR?: Prisma.MealExpenseWhereInput[]
   NOT?: Prisma.MealExpenseWhereInput | Prisma.MealExpenseWhereInput[]
-  expenseId?: Prisma.StringFilter<"MealExpense"> | string
   discountBreakfast?: Prisma.IntFilter<"MealExpense"> | number
   discountLunch?: Prisma.IntFilter<"MealExpense"> | number
   discountDinner?: Prisma.IntFilter<"MealExpense"> | number
   expense?: Prisma.XOR<Prisma.ExpenseScalarRelationFilter, Prisma.ExpenseWhereInput>
-}, "id">
+}, "id" | "expenseId">
 
 export type MealExpenseOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -277,7 +277,7 @@ export type MealExpenseCreateInput = {
   discountBreakfast: number
   discountLunch: number
   discountDinner: number
-  expense: Prisma.ExpenseCreateNestedOneWithoutMealExpensesInput
+  expense: Prisma.ExpenseCreateNestedOneWithoutMealExpenseInput
 }
 
 export type MealExpenseUncheckedCreateInput = {
@@ -293,7 +293,7 @@ export type MealExpenseUpdateInput = {
   discountBreakfast?: Prisma.IntFieldUpdateOperationsInput | number
   discountLunch?: Prisma.IntFieldUpdateOperationsInput | number
   discountDinner?: Prisma.IntFieldUpdateOperationsInput | number
-  expense?: Prisma.ExpenseUpdateOneRequiredWithoutMealExpensesNestedInput
+  expense?: Prisma.ExpenseUpdateOneRequiredWithoutMealExpenseNestedInput
 }
 
 export type MealExpenseUncheckedUpdateInput = {
@@ -327,14 +327,9 @@ export type MealExpenseUncheckedUpdateManyInput = {
   discountDinner?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type MealExpenseListRelationFilter = {
-  every?: Prisma.MealExpenseWhereInput
-  some?: Prisma.MealExpenseWhereInput
-  none?: Prisma.MealExpenseWhereInput
-}
-
-export type MealExpenseOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type MealExpenseNullableScalarRelationFilter = {
+  is?: Prisma.MealExpenseWhereInput | null
+  isNot?: Prisma.MealExpenseWhereInput | null
 }
 
 export type MealExpenseCountOrderByAggregateInput = {
@@ -373,46 +368,36 @@ export type MealExpenseSumOrderByAggregateInput = {
   discountDinner?: Prisma.SortOrder
 }
 
-export type MealExpenseCreateNestedManyWithoutExpenseInput = {
-  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput> | Prisma.MealExpenseCreateWithoutExpenseInput[] | Prisma.MealExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput | Prisma.MealExpenseCreateOrConnectWithoutExpenseInput[]
-  createMany?: Prisma.MealExpenseCreateManyExpenseInputEnvelope
-  connect?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
+export type MealExpenseCreateNestedOneWithoutExpenseInput = {
+  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput
+  connect?: Prisma.MealExpenseWhereUniqueInput
 }
 
-export type MealExpenseUncheckedCreateNestedManyWithoutExpenseInput = {
-  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput> | Prisma.MealExpenseCreateWithoutExpenseInput[] | Prisma.MealExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput | Prisma.MealExpenseCreateOrConnectWithoutExpenseInput[]
-  createMany?: Prisma.MealExpenseCreateManyExpenseInputEnvelope
-  connect?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
+export type MealExpenseUncheckedCreateNestedOneWithoutExpenseInput = {
+  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput
+  connect?: Prisma.MealExpenseWhereUniqueInput
 }
 
-export type MealExpenseUpdateManyWithoutExpenseNestedInput = {
-  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput> | Prisma.MealExpenseCreateWithoutExpenseInput[] | Prisma.MealExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput | Prisma.MealExpenseCreateOrConnectWithoutExpenseInput[]
-  upsert?: Prisma.MealExpenseUpsertWithWhereUniqueWithoutExpenseInput | Prisma.MealExpenseUpsertWithWhereUniqueWithoutExpenseInput[]
-  createMany?: Prisma.MealExpenseCreateManyExpenseInputEnvelope
-  set?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  disconnect?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  delete?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  connect?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  update?: Prisma.MealExpenseUpdateWithWhereUniqueWithoutExpenseInput | Prisma.MealExpenseUpdateWithWhereUniqueWithoutExpenseInput[]
-  updateMany?: Prisma.MealExpenseUpdateManyWithWhereWithoutExpenseInput | Prisma.MealExpenseUpdateManyWithWhereWithoutExpenseInput[]
-  deleteMany?: Prisma.MealExpenseScalarWhereInput | Prisma.MealExpenseScalarWhereInput[]
+export type MealExpenseUpdateOneWithoutExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput
+  upsert?: Prisma.MealExpenseUpsertWithoutExpenseInput
+  disconnect?: Prisma.MealExpenseWhereInput | boolean
+  delete?: Prisma.MealExpenseWhereInput | boolean
+  connect?: Prisma.MealExpenseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MealExpenseUpdateToOneWithWhereWithoutExpenseInput, Prisma.MealExpenseUpdateWithoutExpenseInput>, Prisma.MealExpenseUncheckedUpdateWithoutExpenseInput>
 }
 
-export type MealExpenseUncheckedUpdateManyWithoutExpenseNestedInput = {
-  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput> | Prisma.MealExpenseCreateWithoutExpenseInput[] | Prisma.MealExpenseUncheckedCreateWithoutExpenseInput[]
-  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput | Prisma.MealExpenseCreateOrConnectWithoutExpenseInput[]
-  upsert?: Prisma.MealExpenseUpsertWithWhereUniqueWithoutExpenseInput | Prisma.MealExpenseUpsertWithWhereUniqueWithoutExpenseInput[]
-  createMany?: Prisma.MealExpenseCreateManyExpenseInputEnvelope
-  set?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  disconnect?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  delete?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  connect?: Prisma.MealExpenseWhereUniqueInput | Prisma.MealExpenseWhereUniqueInput[]
-  update?: Prisma.MealExpenseUpdateWithWhereUniqueWithoutExpenseInput | Prisma.MealExpenseUpdateWithWhereUniqueWithoutExpenseInput[]
-  updateMany?: Prisma.MealExpenseUpdateManyWithWhereWithoutExpenseInput | Prisma.MealExpenseUpdateManyWithWhereWithoutExpenseInput[]
-  deleteMany?: Prisma.MealExpenseScalarWhereInput | Prisma.MealExpenseScalarWhereInput[]
+export type MealExpenseUncheckedUpdateOneWithoutExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.MealExpenseCreateOrConnectWithoutExpenseInput
+  upsert?: Prisma.MealExpenseUpsertWithoutExpenseInput
+  disconnect?: Prisma.MealExpenseWhereInput | boolean
+  delete?: Prisma.MealExpenseWhereInput | boolean
+  connect?: Prisma.MealExpenseWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MealExpenseUpdateToOneWithWhereWithoutExpenseInput, Prisma.MealExpenseUpdateWithoutExpenseInput>, Prisma.MealExpenseUncheckedUpdateWithoutExpenseInput>
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -442,43 +427,15 @@ export type MealExpenseCreateOrConnectWithoutExpenseInput = {
   create: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput>
 }
 
-export type MealExpenseCreateManyExpenseInputEnvelope = {
-  data: Prisma.MealExpenseCreateManyExpenseInput | Prisma.MealExpenseCreateManyExpenseInput[]
-  skipDuplicates?: boolean
-}
-
-export type MealExpenseUpsertWithWhereUniqueWithoutExpenseInput = {
-  where: Prisma.MealExpenseWhereUniqueInput
+export type MealExpenseUpsertWithoutExpenseInput = {
   update: Prisma.XOR<Prisma.MealExpenseUpdateWithoutExpenseInput, Prisma.MealExpenseUncheckedUpdateWithoutExpenseInput>
   create: Prisma.XOR<Prisma.MealExpenseCreateWithoutExpenseInput, Prisma.MealExpenseUncheckedCreateWithoutExpenseInput>
+  where?: Prisma.MealExpenseWhereInput
 }
 
-export type MealExpenseUpdateWithWhereUniqueWithoutExpenseInput = {
-  where: Prisma.MealExpenseWhereUniqueInput
+export type MealExpenseUpdateToOneWithWhereWithoutExpenseInput = {
+  where?: Prisma.MealExpenseWhereInput
   data: Prisma.XOR<Prisma.MealExpenseUpdateWithoutExpenseInput, Prisma.MealExpenseUncheckedUpdateWithoutExpenseInput>
-}
-
-export type MealExpenseUpdateManyWithWhereWithoutExpenseInput = {
-  where: Prisma.MealExpenseScalarWhereInput
-  data: Prisma.XOR<Prisma.MealExpenseUpdateManyMutationInput, Prisma.MealExpenseUncheckedUpdateManyWithoutExpenseInput>
-}
-
-export type MealExpenseScalarWhereInput = {
-  AND?: Prisma.MealExpenseScalarWhereInput | Prisma.MealExpenseScalarWhereInput[]
-  OR?: Prisma.MealExpenseScalarWhereInput[]
-  NOT?: Prisma.MealExpenseScalarWhereInput | Prisma.MealExpenseScalarWhereInput[]
-  id?: Prisma.StringFilter<"MealExpense"> | string
-  expenseId?: Prisma.StringFilter<"MealExpense"> | string
-  discountBreakfast?: Prisma.IntFilter<"MealExpense"> | number
-  discountLunch?: Prisma.IntFilter<"MealExpense"> | number
-  discountDinner?: Prisma.IntFilter<"MealExpense"> | number
-}
-
-export type MealExpenseCreateManyExpenseInput = {
-  id?: string
-  discountBreakfast: number
-  discountLunch: number
-  discountDinner: number
 }
 
 export type MealExpenseUpdateWithoutExpenseInput = {
@@ -489,13 +446,6 @@ export type MealExpenseUpdateWithoutExpenseInput = {
 }
 
 export type MealExpenseUncheckedUpdateWithoutExpenseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  discountBreakfast?: Prisma.IntFieldUpdateOperationsInput | number
-  discountLunch?: Prisma.IntFieldUpdateOperationsInput | number
-  discountDinner?: Prisma.IntFieldUpdateOperationsInput | number
-}
-
-export type MealExpenseUncheckedUpdateManyWithoutExpenseInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   discountBreakfast?: Prisma.IntFieldUpdateOperationsInput | number
   discountLunch?: Prisma.IntFieldUpdateOperationsInput | number
