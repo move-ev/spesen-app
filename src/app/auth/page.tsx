@@ -1,7 +1,7 @@
-import { LoginForm } from "@/components/forms/login";
-import { PageDescription, PageTitle } from "@/components/page-title";
-import Image from "next/image";
-import MoveIcon from "../../../public/move-icon.svg";
+import Image from 'next/image'
+import { LoginForm } from '@/components/forms/login'
+import { PageDescription, PageTitle } from '@/components/page-title'
+import MoveIcon from '../../../public/move-icon.svg'
 
 export default async function ServerPage() {
   return (
@@ -13,5 +13,5 @@ export default async function ServerPage() {
       </PageDescription>
       <LoginForm className="mt-8" />
     </div>
-  );
+  )
 }

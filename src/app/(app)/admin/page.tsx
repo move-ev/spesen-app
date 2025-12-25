@@ -1,17 +1,17 @@
+import { Suspense } from 'react'
 import {
   AdminReportListInReview,
   AdminReportListRejected,
-} from "@/components/admin-report-lists";
-import AdminStats from "@/components/admin-stats";
-import { PageSubtitle, PageTitle } from "@/components/page-title";
-import { ReportListSkeleton } from "@/components/report-list";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { api } from "@/trpc/server";
-import { Suspense } from "react";
+} from '@/components/admin-report-lists'
+import AdminStats from '@/components/admin-stats'
+import { PageSubtitle, PageTitle } from '@/components/page-title'
+import { ReportListSkeleton } from '@/components/report-list'
+import { Separator } from '@/components/ui/separator'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { api } from '@/trpc/server'
 
 export default async function ServerPage() {
-  void api.report.listRejected.prefetch();
+  void api.report.listRejected.prefetch()
 
   return (
     <>
@@ -52,5 +52,5 @@ export default async function ServerPage() {
         </section>
       </Tabs>
     </>
-  );
+  )
 }

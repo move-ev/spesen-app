@@ -1,6 +1,6 @@
-import { getReportByIdSchema } from "@/lib/validators";
-import { TRPCError } from "@trpc/server";
-import { adminProcedure, createTRPCRouter, protectedProcedure } from "../trpc";
+import { TRPCError } from '@trpc/server'
+import { getReportByIdSchema } from '@/lib/validators'
+import { adminProcedure, createTRPCRouter, protectedProcedure } from '../trpc'
 
 export const reportRouter = createTRPCRouter({
   getHeaderDetails: protectedProcedure
@@ -17,23 +17,23 @@ export const reportRouter = createTRPCRouter({
             },
           },
         },
-      });
+      })
 
       if (!report) {
         throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Report not found",
-        });
+          code: 'NOT_FOUND',
+          message: 'Report not found',
+        })
       }
 
       if (
-        ctx.session.user.role !== "admin" &&
+        ctx.session.user.role !== 'admin' &&
         report.requestorId !== ctx.session.user.id
       ) {
         throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not authorized to view this report",
-        });
+          code: 'UNAUTHORIZED',
+          message: 'You are not authorized to view this report',
+        })
       }
 
       return {
@@ -42,7 +42,7 @@ export const reportRouter = createTRPCRouter({
           (acc, expense) => acc + Number(expense.amount),
           0,
         ),
-      };
+      }
     }),
   getExpenses: protectedProcedure
     .input(getReportByIdSchema)
@@ -51,16 +51,16 @@ export const reportRouter = createTRPCRouter({
         where: {
           reportId: input.id,
         },
-      });
+      })
 
       if (!expenses) {
         throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Expenses not found",
-        });
+          code: 'NOT_FOUND',
+          message: 'Expenses not found',
+        })
       }
 
-      return expenses;
+      return expenses
     }),
   getById: protectedProcedure
     .input(getReportByIdSchema)
@@ -75,44 +75,44 @@ export const reportRouter = createTRPCRouter({
           businessUnit: true,
           reviewer: true,
         },
-      });
+      })
 
       if (!report) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Report not found" });
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Report not found' })
       }
 
       if (
-        ctx.session.user.role !== "admin" &&
+        ctx.session.user.role !== 'admin' &&
         report.requestorId !== ctx.session.user.id
       ) {
         throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not authorized to view this report",
-        });
+          code: 'UNAUTHORIZED',
+          message: 'You are not authorized to view this report',
+        })
       }
 
-      return report;
+      return report
     }),
   countAccepted: adminProcedure.query(async ({ ctx }) => {
     return ctx.db.report.count({
       where: {
-        status: "APPROVED",
+        status: 'APPROVED',
       },
-    });
+    })
   }),
   countRejected: adminProcedure.query(async ({ ctx }) => {
     return ctx.db.report.count({
       where: {
-        status: "REJECTED",
+        status: 'REJECTED',
       },
-    });
+    })
   }),
   countInReview: adminProcedure.query(async ({ ctx }) => {
     return ctx.db.report.count({
       where: {
-        status: "IN_REVIEW",
+        status: 'IN_REVIEW',
       },
-    });
+    })
   }),
   /**
    * TODO: Add status filter
@@ -127,9 +127,9 @@ export const reportRouter = createTRPCRouter({
       //       status: "",
       //     },
       //   },
-    });
+    })
 
-    return result._sum.amount?.toFixed(2) ?? "0.00";
+    return result._sum.amount?.toFixed(2) ?? '0.00'
   }),
   listAll: adminProcedure.query(async ({ ctx }) => {
     const reports = await ctx.db.report.findMany({
@@ -142,19 +142,19 @@ export const reportRouter = createTRPCRouter({
           },
         },
       },
-    });
+    })
 
     return reports.map((report) => ({
       ...report,
       totalAmount: report.expenses
         .reduce((sum, expense) => sum + Number(expense.amount), 0)
         .toFixed(2),
-    }));
+    }))
   }),
   listInReview: adminProcedure.query(async ({ ctx }) => {
     const reports = await ctx.db.report.findMany({
       where: {
-        status: "IN_REVIEW",
+        status: 'IN_REVIEW',
       },
       include: {
         requestor: true,
@@ -165,19 +165,19 @@ export const reportRouter = createTRPCRouter({
           },
         },
       },
-    });
+    })
 
     return reports.map((report) => ({
       ...report,
       totalAmount: report.expenses
         .reduce((sum, expense) => sum + Number(expense.amount), 0)
         .toFixed(2),
-    }));
+    }))
   }),
   listRejected: adminProcedure.query(async ({ ctx }) => {
     const reports = await ctx.db.report.findMany({
       where: {
-        status: "REJECTED",
+        status: 'REJECTED',
       },
       include: {
         requestor: true,
@@ -188,13 +188,13 @@ export const reportRouter = createTRPCRouter({
           },
         },
       },
-    });
+    })
 
     return reports.map((report) => ({
       ...report,
       totalAmount: report.expenses
         .reduce((sum, expense) => sum + Number(expense.amount), 0)
         .toFixed(2),
-    }));
+    }))
   }),
-});
+})

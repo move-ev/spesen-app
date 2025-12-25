@@ -1,37 +1,37 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { User } from "better-auth";
-import React from "react";
+import type { User } from 'better-auth'
+import React from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export function UserAvatar({
   user,
   ...props
 }: React.ComponentProps<typeof Avatar> & {
-  user: User;
+  user: User
 }) {
   const initials = React.useMemo(() => {
-    if (!user.name) return "?";
+    if (!user.name) return '?'
 
-    const [firstName, lastName] = user.name.split(" ");
+    const [firstName, lastName] = user.name.split(' ')
 
-    if (!firstName && !lastName) return "?";
+    if (!firstName && !lastName) return '?'
 
-    let initials = "";
+    let initials = ''
 
     if (firstName) {
-      initials += firstName.charAt(0).toUpperCase();
+      initials += firstName.charAt(0).toUpperCase()
     }
 
     if (lastName) {
-      initials += lastName.charAt(0).toUpperCase();
+      initials += lastName.charAt(0).toUpperCase()
     }
 
-    return initials;
-  }, [user.name]);
+    return initials
+  }, [user.name])
 
   return (
     <Avatar {...props}>
-      <AvatarImage src={user.image ?? ""} />
+      <AvatarImage src={user.image ?? ''} />
       <AvatarFallback>{initials}</AvatarFallback>
     </Avatar>
-  );
+  )
 }

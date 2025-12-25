@@ -1,7 +1,7 @@
-import { APP_ROUTES, AUTH_ROUTES } from "@/lib/routes";
-import { auth } from "@/server/better-auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { APP_ROUTES, AUTH_ROUTES } from '@/lib/routes'
+import { auth } from '@/server/better-auth'
 
 /**
  * Checks if the user is logged in an if they are allowed to access
@@ -12,15 +12,15 @@ export default async function ServerLayout({
 }: React.PropsWithChildren) {
   const session = await auth.api.getSession({
     headers: await headers(),
-  });
+  })
 
   if (!session?.user) {
-    redirect(AUTH_ROUTES.LOGIN);
+    redirect(AUTH_ROUTES.LOGIN)
   }
 
-  if (session.user.role !== "admin") {
-    redirect(APP_ROUTES.HOME);
+  if (session.user.role !== 'admin') {
+    redirect(APP_ROUTES.HOME)
   }
 
-  return children;
+  return children
 }

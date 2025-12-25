@@ -1,5 +1,14 @@
-"use client";
+'use client'
 
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from 'lucide-react'
+import * as React from 'react'
 import {
   CommandDialog,
   CommandEmpty,
@@ -9,45 +18,36 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
-import { cn } from "@/lib/utils";
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
-import * as React from "react";
-import { Button } from "./ui/button";
+} from '@/components/ui/command'
+import { cn } from '@/lib/utils'
+import { Button } from './ui/button'
 
-const COMMAND_KEYBOARD_SHORTCUT = "k";
+const COMMAND_KEYBOARD_SHORTCUT = 'k'
 
 export function AppCommand({
   className,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === COMMAND_KEYBOARD_SHORTCUT && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((open) => !open);
+        e.preventDefault()
+        setOpen((open) => !open)
       }
-    };
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
+    }
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
 
   return (
     <>
       <Button
         data-slot="command-trigger"
         className={cn(
-          "mr-auto flex h-8 w-full max-w-xs items-center justify-between rounded-none bg-zinc-100 px-3 py-1.5 text-zinc-700",
-          "hover:bg-zinc-200",
+          'mr-auto flex h-8 w-full max-w-xs items-center justify-between rounded-none bg-zinc-100 px-3 py-1.5 text-zinc-700',
+          'hover:bg-zinc-200',
           className,
         )}
         onClick={() => setOpen(true)}
@@ -95,5 +95,5 @@ export function AppCommand({
         </CommandList>
       </CommandDialog>
     </>
-  );
+  )
 }

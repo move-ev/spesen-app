@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { api } from "@/trpc/react";
-import { format } from "date-fns";
-import { EllipsisVerticalIcon } from "lucide-react";
-import { UpdateBusinessUnitForm } from "../forms/update-business-unit";
-import { Button } from "../ui/button";
+import { format } from 'date-fns'
+import { EllipsisVerticalIcon } from 'lucide-react'
+import { api } from '@/trpc/react'
+import { UpdateBusinessUnitForm } from '../forms/update-business-unit'
+import { Button } from '../ui/button'
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
+} from '../ui/sheet'
 import {
   Table,
   TableBody,
@@ -19,10 +19,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
+} from '../ui/table'
 
 export function BusinessUnitsTable() {
-  const [units] = api.businessUnit.list.useSuspenseQuery();
+  const [units] = api.businessUnit.list.useSuspenseQuery()
 
   return (
     <Table>
@@ -39,17 +39,17 @@ export function BusinessUnitsTable() {
           <TableRow key={unit.id}>
             <TableCell>{unit.name}</TableCell>
             <TableCell>
-              {format(unit.createdAt, "dd.MM.yyyy")} um{" "}
-              {format(unit.createdAt, "HH:mm")} Uhr{" "}
+              {format(unit.createdAt, 'dd.MM.yyyy')} um{' '}
+              {format(unit.createdAt, 'HH:mm')} Uhr{' '}
             </TableCell>
             <TableCell>
-              {format(unit.updatedAt, "dd.MM.yyyy")} um{" "}
-              {format(unit.updatedAt, "HH:mm")} Uhr{" "}
+              {format(unit.updatedAt, 'dd.MM.yyyy')} um{' '}
+              {format(unit.updatedAt, 'HH:mm')} Uhr{' '}
             </TableCell>
             <TableCell className="flex justify-end">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant={"ghost"} size={"icon-sm"}>
+                  <Button variant={'ghost'} size={'icon-sm'}>
                     <EllipsisVerticalIcon />
                   </Button>
                 </SheetTrigger>
@@ -78,5 +78,5 @@ export function BusinessUnitsTable() {
         )}
       </TableBody>
     </Table>
-  );
+  )
 }

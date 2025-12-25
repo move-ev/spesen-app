@@ -1,24 +1,24 @@
-import { ReportHeader } from "@/components/report-header";
-import { APP_ROUTES } from "@/lib/routes";
-import { cn } from "@/lib/utils";
-import { api } from "@/trpc/server";
-import { ArrowLeftIcon } from "lucide-react";
-import Link from "next/link";
+import { ArrowLeftIcon } from 'lucide-react'
+import Link from 'next/link'
+import { ReportHeader } from '@/components/report-header'
+import { APP_ROUTES } from '@/lib/routes'
+import { cn } from '@/lib/utils'
+import { api } from '@/trpc/server'
 
 export async function AdminReportDetailsHeaderSection({
   reportId,
   className,
   ...props
-}: React.ComponentProps<"section"> & {
-  reportId: string;
+}: React.ComponentProps<'section'> & {
+  reportId: string
 }) {
   void api.report.getHeaderDetails.prefetch({
     id: reportId,
-  });
+  })
 
   return (
     <section
-      className={cn("mx-auto w-full max-w-384 px-8", className)}
+      className={cn('mx-auto w-full max-w-384 px-8', className)}
       {...props}
     >
       <Link
@@ -30,5 +30,5 @@ export async function AdminReportDetailsHeaderSection({
       </Link>
       <ReportHeader reportId={reportId} className="mt-4" />
     </section>
-  );
+  )
 }
