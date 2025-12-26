@@ -1,5 +1,5 @@
 import { TRPCError } from '@trpc/server'
-import { getReportByIdSchema } from '@/lib/validators'
+import { createReportSchema, getReportByIdSchema } from '@/lib/validators'
 import { adminProcedure, createTRPCRouter, protectedProcedure } from '../trpc'
 
 export const reportRouter = createTRPCRouter({
@@ -197,4 +197,15 @@ export const reportRouter = createTRPCRouter({
         .toFixed(2),
     }))
   }),
+  create: protectedProcedure
+    .input(createReportSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.report.create({
+        data: {
+          ...input,
+          requestorId: ctx.session.user.id,
+          status: 'DRAFT',
+        },
+      })
+    }),
 })

@@ -32,3 +32,10 @@ export const deleteAccountingUnitSchema = z.object({
 export const getReportByIdSchema = z.object({
   id: z.string().min(1),
 })
+
+export const createReportSchema = z.object({
+  title: z.string().min(1),
+  reason: z.string().min(1),
+  businessUnitId: z.string().min(1),
+  accountingUnitId: z.string().min(1),
+})
